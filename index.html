@@ -1500,7 +1500,7 @@
     </section>
 
     <!-- TESTIMONIALS -->
-    <section class="wrap" id="comments">
+<section class="wrap" id="comments">
   <div class="section-title reveal">
     <div>
       <h2>Client Comments</h2>
@@ -1517,7 +1517,7 @@
         data-mapping="pathname"
         data-strict="0"
         data-reactions-enabled="1"
-        data-emit-metadata="0"
+        data-emit-metadata="1"
         data-input-position="bottom"
         data-theme="preferred_color_scheme"
         data-lang="de"
@@ -1526,6 +1526,7 @@
 </script>
   </div>
 </section>
+
 
     <!-- CONTACT -->
     <section id="contact" class="wrap">
@@ -1663,6 +1664,41 @@ function updateProfileStats(){
 }
 
 updateProfileStats();
+
+// =========================
+// Giscus -> Performance score
+// =========================
+window.addEventListener("message", (event) => {
+  // giscus sends messages from this origin
+  if (event.origin !== "https://giscus.app") return;
+
+  const data = event.data;
+
+  // We only care about discussion metadata
+  if (!data || !data.giscus) return;
+
+  const meta = data.giscus;
+
+  // meta can include total comment count
+  const totalComments = meta.totalCommentCount;
+
+  if (typeof totalComments !== "number") return;
+
+  const performanceEl = document.getElementById("performanceScore");
+  if (!performanceEl) return;
+
+  // ---- Score logic (you can change it)
+  let score = "—";
+
+  if (totalComments === 0) score = "—";
+  else if (totalComments <= 2) score = "70";
+  else if (totalComments <= 5) score = "85";
+  else if (totalComments <= 10) score = "92";
+  else score = "98";
+
+  performanceEl.textContent = score;
+});
+
 
     // --- Reveal on scroll
     const reveals = $$(".reveal");
@@ -2020,5 +2056,4 @@ window.addEventListener("load", () => {
 
 
 </body>
-
 </html>
