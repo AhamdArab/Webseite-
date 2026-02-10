@@ -1754,6 +1754,19 @@ body.light .typing-bubble span{
   40%{ transform: translateY(-5px); opacity:1; }
 }
 
+/* =========================
+   KEYBOARD SAFE CHAT (MOBILE)
+========================= */
+
+/* نخلي الشات يستخدم safe-area + يتحرك مع الكيبورد */
+@media (max-width: 768px){
+  #reqBot{
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    height: min(520px, calc(100dvh - 120px));
+  }
+}
+
+
   </style>
 </head>
 
@@ -2923,6 +2936,51 @@ reqClose.onclick = () => {
   reqInput.addEventListener("keydown", (e) => {
     if(e.key === "Enter") handleSend();
   });
+
+  // =========================
+// Mobile: move chat above keyboard (PRO)
+// =========================
+function setupKeyboardSafeChat(){
+  if(!window.visualViewport) return;
+
+  const vv = window.visualViewport;
+
+  function update(){
+    // إذا الشات مش مفتوح ما نعمل شيء
+    if(!reqBot.classList.contains("open")) return;
+
+    // ارتفاع الجزء المرئي (ينقص عند ظهور الكيبورد)
+    const viewportHeight = vv.height;
+    const windowHeight = window.innerHeight;
+
+    // فرق الارتفاع = تقريباً ارتفاع الكيبورد
+    const keyboardHeight = Math.max(0, windowHeight - viewportHeight);
+
+    // نرفع الشات فوق الكيبورد
+    // 16px margin + safe area
+    reqBot.style.bottom = `calc(${keyboardHeight + 16}px + env(safe-area-inset-bottom))`;
+  }
+
+  vv.addEventListener("resize", update);
+  vv.addEventListener("scroll", update);
+
+  // تحديث عند فتح الشات
+  reqToggle.addEventListener("click", () => {
+    setTimeout(update, 120);
+  });
+
+  // تحديث عند التركيز على input
+  reqInput.addEventListener("focus", () => {
+    setTimeout(update, 120);
+  });
+
+  // رجوع طبيعي عند الإغلاق
+  reqClose.addEventListener("click", () => {
+    reqBot.style.bottom = "";
+  });
+}
+
+setupKeyboardSafeChat();
 
 });
 
