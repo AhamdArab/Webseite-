@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=1120, initial-scale=1.0" />
-  <title>Ahmad Arab — Software Engineer</title>
-  <meta name="description" content="Ahmad Arab — Software Engineer. Web Development, Automation, AI Integrations." />
+  <title>Ahmad Arab — Informatik Graduate • Web Developer</title>
+  <meta name="description" content="Ahmad Arab — Informatik Graduate and Web Developer. Modern websites, Java projects, and automation solutions." />
   <meta name="theme-color" content="#0b1020" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Ahmad Arab — Software Engineer" />
+  <meta name="description" content="Ahmad Arab — Informatik Graduate and Web Developer. Modern websites, Java projects, and automation solutions." />
   <meta property="og:description" content="Web Development • Automation • AI Integrations" />
   <meta property="og:type" content="website" />
 
@@ -713,6 +713,120 @@ body.light{
       font-size: 13px;
     }
 
+    /* =========================
+   FOOTER (PRO GRID)
+========================= */
+
+.footer-pro{
+  padding: 22px;
+  text-align:left;
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns: 1.2fr 1fr .9fr;
+  gap: 22px;
+  align-items:start;
+}
+
+.footer-title{
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 8px;
+  color: var(--text);
+  letter-spacing: .2px;
+}
+
+.footer-text{
+  margin:0;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 13px;
+}
+
+.footer-link{
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer-socials{
+  display:flex;
+  gap: 10px;
+  flex-wrap:wrap;
+}
+
+.social-btn{
+  width: 46px;
+  height: 46px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.04);
+
+  display:grid;
+  place-items:center;
+
+  transition: .25s ease;
+  position: relative;
+  overflow:hidden;
+}
+
+.social-btn svg{
+  width: 22px;
+  height: 22px;
+  color: rgba(255,255,255,.92);
+  filter: drop-shadow(0 12px 25px rgba(0,0,0,.35));
+}
+
+/* Make Instagram bigger */
+
+.social-btn.insta-big svg{
+  width: 40px;
+  height: 40px;
+}
+
+
+/* Light mode icons */
+body.light .social-btn svg{
+  color: rgba(15,23,42,.92);
+}
+
+/* Hover */
+.social-btn:hover{
+  transform: translateY(-2px) scale(1.04);
+  background: rgba(255,255,255,.08);
+  box-shadow:
+    0 20px 55px rgba(0,0,0,.35),
+    0 0 0 6px rgba(124,58,237,.08);
+}
+
+/* Footer bottom */
+.footer-bottom{
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  text-align:center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Responsive footer */
+@media (max-width: 960px){
+  .footer-grid{
+    grid-template-columns: 1fr;
+    text-align:center;
+  }
+
+  .footer-pro{
+    text-align:center;
+  }
+
+  .footer-socials{
+    justify-content:center;
+  }
+}
+
+
     .split{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -1134,14 +1248,16 @@ body.light #reqBot .chat-input{
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: radial-gradient(circle at 50% 45%, rgba(124,58,237,.18), transparent 60%),
-              radial-gradient(circle at 65% 55%, rgba(6,182,212,.14), transparent 55%),
-              #050712;
+  background: radial-gradient(circle at 50% 40%, rgba(124,58,237,.20), transparent 60%),
+              radial-gradient(circle at 60% 55%, rgba(6,182,212,.18), transparent 55%),
+              radial-gradient(circle at 35% 75%, rgba(34,197,94,.10), transparent 60%),
+              var(--bg);
   display:flex;
   align-items:center;
   justify-content:center;
   overflow:hidden;
-  transition: opacity .6s ease, visibility .6s ease;
+  transition: opacity .35s ease, visibility .35s ease;
+  will-change: opacity, transform;
 }
 
 #introOverlay.hide{
@@ -1150,26 +1266,64 @@ body.light #reqBot .chat-input{
   pointer-events:none;
 }
 
-#neuralCanvas{
+/* Neural background layer */
+.intro-neural{
   position:absolute;
   inset:0;
-  width:100%;
-  height:100%;
-  z-index: 1;
+  pointer-events:none;
+  opacity: .55;
+
+  /* شبكة + خطوط */
+  background:
+    radial-gradient(circle at 50% 50%, rgba(6,182,212,.25), transparent 55%),
+    linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
+
+  background-size:
+    100% 100%,
+    60px 60px,
+    60px 60px;
+
+  filter: blur(.2px);
+  animation: gridMove 8s linear infinite;
 }
 
+/* حركة الشبكة */
+@keyframes gridMove{
+  0%{ transform: translateY(0px) scale(1.05); }
+  100%{ transform: translateY(120px) scale(1.05); }
+}
+
+/* تركيز الإضاءة نحو الشعار */
 #introOverlay::before{
   content:"";
   position:absolute;
   inset:0;
-  z-index:2;
   background: radial-gradient(circle at 50% 50%,
-              rgba(255,255,255,.12),
+              rgba(255,255,255,.14),
               rgba(124,58,237,.10),
               transparent 60%);
+  opacity: .8;
   pointer-events:none;
 }
 
+/* Shine sweep */
+#introOverlay::after{
+  content:"";
+  position:absolute;
+  inset:-40%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+  transform: rotate(25deg);
+  animation: introShine 3.5s linear infinite;
+  pointer-events:none;
+}
+
+@keyframes introShine{
+  0%{ transform: translateX(-30%) rotate(25deg); }
+  100%{ transform: translateX(30%) rotate(25deg); }
+}
+
+/* Center box */
 .intro-box{
   position: relative;
   z-index: 5;
@@ -1180,8 +1334,8 @@ body.light #reqBot .chat-input{
 @keyframes introEnter{
   0%{
     opacity:0;
-    transform: scale(.55);
-    filter: blur(10px);
+    transform: scale(.6);
+    filter: blur(8px);
   }
   100%{
     opacity:1;
@@ -1190,29 +1344,33 @@ body.light #reqBot .chat-input{
   }
 }
 
+/* Bigger logo */
 .intro-logo{
-  width: min(560px, 86vw);
+  width: min(520px, 82vw);
   height: auto;
   object-fit: contain;
 
+  /* 3D look */
   transform-style: preserve-3d;
-  animation: introFloat 3.0s ease-in-out infinite;
+  animation: introFloat 2.8s ease-in-out infinite;
 
+  /* glow */
   filter:
-    drop-shadow(0 25px 90px rgba(0,0,0,.70))
-    drop-shadow(0 0 60px rgba(124,58,237,.30))
-    drop-shadow(0 0 70px rgba(6,182,212,.22));
+    drop-shadow(0 18px 60px rgba(0,0,0,.55))
+    drop-shadow(0 0 35px rgba(124,58,237,.20))
+    drop-shadow(0 0 35px rgba(6,182,212,.14));
 }
 
+/* 3D tilt animation */
 @keyframes introFloat{
   0%{
-    transform: perspective(1200px) rotateX(10deg) rotateY(-12deg) translateY(0);
+    transform: perspective(1100px) rotateX(12deg) rotateY(-14deg) translateY(0);
   }
   50%{
-    transform: perspective(1200px) rotateX(-10deg) rotateY(12deg) translateY(-10px);
+    transform: perspective(1100px) rotateX(-12deg) rotateY(14deg) translateY(-10px);
   }
   100%{
-    transform: perspective(1200px) rotateX(10deg) rotateY(-12deg) translateY(0);
+    transform: perspective(1100px) rotateX(12deg) rotateY(-14deg) translateY(0);
   }
 }
 
@@ -1738,7 +1896,7 @@ body.light .typing-bubble span{
         </div>
         <div>
           <strong>Ahmad Arab</strong>
-          <span>Software Engineer • Würzburg</span>
+          <span>Informatik Graduate • Würzburg</span>
         </div>
       </div>
 
@@ -1839,7 +1997,7 @@ body.light .typing-bubble span{
 
               <div class="p-name">Ahmad Arab</div>
               <p class="p-role">
-                Software Engineer • Web Developer <br/>
+                Informatik Graduate • Web Developer <br/>
                 Based in Würzburg, Germany
               </p>
             </div>
@@ -2163,7 +2321,7 @@ body.light .typing-bubble span{
         <div>
           <h2>About</h2>
           <p class="sub">
-            I combine strong software engineering skills with modern UI development — building Java systems, clean GUI applications, and high-performance web apps.
+            I combine strong Informatik fundamentals with modern UI development — building Java projects, clean GUI applications, and high-performance web apps.
           </p>
         </div>
       </div>
@@ -2176,7 +2334,7 @@ body.light .typing-bubble span{
             <div class="bullet" aria-hidden="true"></div>
             <div>
               <strong>University of Würzburg — Informatik</strong>
-              <span>Graduated • Strong focus on software engineering, systems, and practical projects.</span>
+              <span>Graduated • Strong focus on programming, systems, and practical university projects.</span>
             </div>
           </div>
 
@@ -2371,18 +2529,91 @@ body.light .typing-bubble span{
     </section>
 
     <section class="wrap footer">
-      <div class="card" style="padding:16px;">
-        <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
-          <div>
-            <strong>Ahmad Arab</strong>
-            <div style="margin-top:6px;">© <span id="year"></span> — All rights reserved.</div>
-          </div>
-          <div style="color:var(--muted);">
-            Built with HTML • CSS • JavaScript
-          </div>
+  <div class="card footer-pro">
+
+    <div class="footer-grid">
+
+      <!-- About -->
+      <div class="footer-col">
+        <div class="footer-title">About me</div>
+        <p class="footer-text">
+          Informatik Graduate & Web Developer focused on modern web apps, Java projects, and clean UI solutions.
+        </p>
+      </div>
+
+      <!-- Contact -->
+      <div class="footer-col">
+        <div class="footer-title">Contact info</div>
+
+        <div class="footer-text">
+          Adresse: Remote / Germany <br>
+          Email:
+          <a class="footer-link" href="mailto:A7mad3rab1997@gmail.com">
+            A7mad3rab1997@gmail.com
+          </a>
         </div>
       </div>
-    </section>
+
+      <!-- Follow -->
+      <div class="footer-col">
+        <div class="footer-title">Folgen Sie mir</div>
+
+        <div class="footer-socials">
+
+          <!-- LinkedIn -->
+          <a class="social-btn" href="https://www.linkedin.com/in/ahmad-arab-433758312"
+             target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M6 9H3v12h3V9ZM4.5 3A1.5 1.5 0 1 0 4.5 6 1.5 1.5 0 0 0 4.5 3Z"
+                    stroke="currentColor" stroke-width="1.8"/>
+              <path d="M9 9h3v2c.5-1.2 1.9-2.2 3.8-2.2 3 0 5.2 2 5.2 6V21h-3v-5.6c0-2.2-.9-3.5-2.8-3.5-1.8 0-3.2 1.2-3.2 3.6V21H9V9Z"
+                    stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+          </a>
+
+          <!-- GitHub -->
+          <a class="social-btn" href="https://github.com/AhamdArab"
+             target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M9 19c-4 1.5-4-2.5-6-3m12 6v-3.5c0-1 .1-1.4-.5-2
+              2.5-.3 5-1.2 5-5.5 0-1.2-.4-2.2-1.2-3
+              .1-.3.5-1.6-.1-3.2 0 0-1-.3-3.2 1.2
+              -1-.3-2-.4-3-.4s-2 .1-3 .4C6.6 1.7 5.6 2 5.6 2
+              5 3.6 5.4 4.9 5.5 5.2
+              4.7 6 4.3 7 4.3 8.2c0 4.3 2.5 5.2 5 5.5
+              -.4.4-.6 1-.6 2V22"
+                    stroke="currentColor" stroke-width="1.6"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+
+          <!-- Instagram -->
+          <a class="social-btn insta-big" href="https://www.instagram.com/3raba7mad?igsh=MTc3MWUxYnBmZzlwcw=="
+             target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="7" y="7" width="10" height="10" rx="3"
+                    stroke="currentColor" stroke-width="1.8"/>
+              <path d="M10.5 12a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0Z"
+                    stroke="currentColor" stroke-width="1.8"/>
+              <path d="M15.7 8.4h.01"
+                    stroke="currentColor" stroke-width="2.6"
+                    stroke-linecap="round"/>
+            </svg>
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer-bottom">
+      © <span id="year"></span> Ahmad Arab. All rights reserved.
+    </div>
+
+  </div>
+</section>
+
   </main>
 
   <a class="top-btn" id="topBtn" href="#top" aria-label="Back to top">
