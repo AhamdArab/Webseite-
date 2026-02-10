@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=1200, initial-scale=1.0" />
   <title>Ahmad Arab — Software Engineer</title>
   <meta name="description" content="Ahmad Arab — Software Engineer. Web Development, Automation, AI Integrations." />
   <meta name="theme-color" content="#0b1020" />
@@ -59,7 +59,8 @@
                   radial-gradient(900px 700px at 30% 90%, rgba(34,197,94,.18), transparent 60%),
                   radial-gradient(900px 650px at 90% 90%, rgba(249,115,22,.12), transparent 60%),
                   var(--bg);
-      overflow-x:hidden;
+      overflow-x: auto;
+      min-width: 1200px;
     }
 
     a{ color: inherit; text-decoration: none; }
@@ -114,25 +115,25 @@
     }
 
     .logo{
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,.04);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  position: relative;
-}
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      position: relative;
+    }
 
-.logo img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  padding: 0;
-  display:block;
-}
+    .logo img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      padding: 0;
+      display:block;
+    }
 
     .logo::after{
       content:"";
@@ -349,37 +350,35 @@
     }
 
     .avatar{
-  width: 64px;
-  height: 64px;
-  border-radius: 20px;
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,.04);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  position: relative; /* مهم جداً */
-}
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      position: relative;
+    }
 
-.avatar img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  padding: 0;
-  display:block;
-}
+    .avatar img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      padding: 0;
+      display:block;
+    }
 
-/* نفس تأثير اللوغو */
-.avatar::after{
-  content:"";
-  position:absolute;
-  inset:-40%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent);
-  transform: rotate(25deg);
-  animation: shine 5s linear infinite;
-  pointer-events:none;
-}
-
+    .avatar::after{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent);
+      transform: rotate(25deg);
+      animation: shine 5s linear infinite;
+      pointer-events:none;
+    }
 
     .p-top{
       display:flex;
@@ -606,868 +605,480 @@
       pointer-events:auto;
     }
 
-    /* Responsive */
-    @media (max-width: 960px){
-      .grid-hero{ grid-template-columns: 1fr; }
-      .stats{ grid-template-columns: repeat(3, 1fr); }
-      .split{ grid-template-columns: 1fr; }
-      nav ul{ display:none; }
-      .hamburger{ display:flex; }
-      .mobile{ display:block; }
+    /* Responsive - FORCE DESKTOP ON MOBILE */
+    @media (max-width: 768px) {
+      html, body {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-text-size-adjust: none;
+        -moz-text-size-adjust: none;
+        -ms-text-size-adjust: none;
+        text-size-adjust: none;
+        touch-action: pan-x pan-y;
+      }
+
+      body {
+        min-width: 1200px;
+        overflow-x: auto;
+        position: relative;
+      }
+
+      .wrap {
+        width: 1120px !important;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Hide mobile elements */
+      .hamburger,
+      .mobile,
+      #mobileMenu {
+        display: none !important;
+      }
+
+      /* Show desktop navigation */
+      nav ul {
+        display: flex !important;
+      }
+
+      /* Force desktop grid layouts */
+      .grid-hero {
+        grid-template-columns: 1.25fr .75fr !important;
+        gap: 26px !important;
+      }
+
+      .grid {
+        display: grid !important;
+        grid-template-columns: repeat(12, 1fr) !important;
+      }
+
+      .col-4 { grid-column: span 4 !important; }
+      .col-6 { grid-column: span 6 !important; }
+      .col-8 { grid-column: span 8 !important; }
+      .col-12 { grid-column: span 12 !important; }
+
+      .stats {
+        grid-template-columns: repeat(3, 1fr) !important;
+      }
+
+      .split {
+        grid-template-columns: 1fr 1fr !important;
+      }
+
+      /* Scroll indicator for mobile */
+      body::after {
+        content: "← Scroll →";
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(124, 58, 237, 0.9);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        z-index: 1000;
+        pointer-events: none;
+        animation: pulse 2s infinite;
+        display: block;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+      }
+
+      /* Prevent zooming */
+      * {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      input, textarea {
+        font-size: 16px !important; /* Prevents iOS zoom on focus */
+      }
     }
-    @media (max-width: 720px){
-      .col-4{ grid-column: span 12; }
-      .col-6{ grid-column: span 12; }
-      .col-8{ grid-column: span 12; }
-      .stats{ grid-template-columns: 1fr; }
+
+    @media (max-width: 480px) {
+      body::after {
+        content: "← Scroll →";
+        font-size: 12px;
+        padding: 6px 12px;
+        bottom: 15px;
+        right: 15px;
+      }
     }
 
     #reqToggle{
-  position: fixed;
-  right: 18px;
-  bottom: 80px;
-  z-index: 100;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: none;
-  background: linear-gradient(135deg, #7c3aed, #06b6d4);
-  color:#fff;
-  font-size:22px;
-  cursor:pointer;
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
-}
-
-#reqBot{
-  position: fixed;
-  right: 18px;
-  bottom: 150px;
-  width: 340px;
-  max-height: 460px;
-  background: #0b1020;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  display: none;
-  flex-direction: column;
-  overflow: hidden;
-  z-index: 100;
-}
-
-#reqBot .chat-header{
-  padding: 12px;
-  font-weight: 700;
-  background: rgba(255,255,255,.08);
-}
-
-#reqBot .chat-messages{
-  padding: 12px;
-  flex: 1;
-  overflow-y: auto;
-  font-size: 13px;
-}
-
-#reqBot .msg{
-  margin-bottom: 10px;
-  line-height: 1.5;
-}
-
-#reqBot .msg.bot{ color:#fff; }
-#reqBot .msg.user{ color:#22c55e; }
-
-#reqBot .chat-input{
-  display:flex;
-  border-top:1px solid var(--line);
-}
-
-#reqBot .chat-input input{
-  flex:1;
-  padding:10px;
-  border:none;
-  outline:none;
-  background:#070a13;
-  color:#fff;
-}
-
-#reqBot .chat-input button{
-  padding:10px 14px;
-  border:none;
-  background:#7c3aed;
-  color:#fff;
-  cursor:pointer;
-}
-
-#reqBot .chat-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
-
-#reqBot .chat-actions{
-  display:flex;
-  gap:8px;
-}
-
-#reqBot .chat-actions button{
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,.14);
-  background: rgba(255,255,255,.06);
-  color:#fff;
-  cursor:pointer;
-  font-size: 15px;
-  transition: .2s ease;
-}
-
-#reqBot .chat-actions button:hover{
-  background: rgba(255,255,255,.12);
-  transform: translateY(-1px);
-}
-
-/* =========================
-   INTRO OVERLAY (PRO)
-========================= */
-
-#introOverlay{
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: radial-gradient(circle at 50% 40%, rgba(124,58,237,.20), transparent 60%),
-              radial-gradient(circle at 60% 55%, rgba(6,182,212,.18), transparent 55%),
-              radial-gradient(circle at 35% 75%, rgba(34,197,94,.10), transparent 60%),
-              #050712;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  transition: opacity .6s ease, visibility .6s ease;
-}
-
-#introOverlay.hide{
-  opacity: 0;
-  visibility: hidden;
-  pointer-events:none;
-}
-
-/* Neural background layer */
-.intro-neural{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  opacity: .55;
-
-  /* شبكة + خطوط */
-  background:
-    radial-gradient(circle at 50% 50%, rgba(6,182,212,.25), transparent 55%),
-    linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
-
-  background-size:
-    100% 100%,
-    60px 60px,
-    60px 60px;
-
-  filter: blur(.2px);
-  animation: gridMove 8s linear infinite;
-}
-
-/* حركة الشبكة */
-@keyframes gridMove{
-  0%{ transform: translateY(0px) scale(1.05); }
-  100%{ transform: translateY(120px) scale(1.05); }
-}
-
-/* تركيز الإضاءة نحو الشعار */
-#introOverlay::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: radial-gradient(circle at 50% 50%,
-              rgba(255,255,255,.14),
-              rgba(124,58,237,.10),
-              transparent 60%);
-  opacity: .8;
-  pointer-events:none;
-}
-
-/* Shine sweep */
-#introOverlay::after{
-  content:"";
-  position:absolute;
-  inset:-40%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
-  transform: rotate(25deg);
-  animation: introShine 3.5s linear infinite;
-  pointer-events:none;
-}
-
-@keyframes introShine{
-  0%{ transform: translateX(-30%) rotate(25deg); }
-  100%{ transform: translateX(30%) rotate(25deg); }
-}
-
-/* Center box */
-.intro-box{
-  position: relative;
-  z-index: 5;
-  transform-style: preserve-3d;
-  animation: introEnter 1.2s ease forwards;
-}
-
-@keyframes introEnter{
-  0%{
-    opacity:0;
-    transform: scale(.6);
-    filter: blur(8px);
-  }
-  100%{
-    opacity:1;
-    transform: scale(1);
-    filter: blur(0px);
-  }
-}
-
-/* Bigger logo */
-.intro-logo{
-  width: min(520px, 82vw);
-  height: auto;
-  object-fit: contain;
-
-  /* 3D look */
-  transform-style: preserve-3d;
-  animation: introFloat 2.8s ease-in-out infinite;
-
-  /* glow */
-  filter:
-    drop-shadow(0 25px 90px rgba(0,0,0,.70))
-    drop-shadow(0 0 60px rgba(124,58,237,.30))
-    drop-shadow(0 0 70px rgba(6,182,212,.20));
-}
-
-/* 3D tilt animation */
-@keyframes introFloat{
-  0%{
-    transform: perspective(1100px) rotateX(12deg) rotateY(-14deg) translateY(0);
-  }
-  50%{
-    transform: perspective(1100px) rotateX(-12deg) rotateY(14deg) translateY(-10px);
-  }
-  100%{
-    transform: perspective(1100px) rotateX(12deg) rotateY(-14deg) translateY(0);
-  }
-}
-
-/* =========================
-   INTRO OVERLAY (NEURAL PRO)
-=========================
-
-#introOverlay{
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: radial-gradient(circle at 50% 45%, rgba(124,58,237,.18), transparent 60%),
-              radial-gradient(circle at 65% 55%, rgba(6,182,212,.14), transparent 55%),
-              #050712;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  transition: opacity .6s ease, visibility .6s ease;
-}
-
-#introOverlay.hide{
-  opacity: 0;
-  visibility: hidden;
-  pointer-events:none;
-}
-
-#neuralCanvas{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  z-index: 1;
-}
-
-#introOverlay::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:2;
-  background: radial-gradient(circle at 50% 50%,
-              rgba(255,255,255,.12),
-              rgba(124,58,237,.10),
-              transparent 60%);
-  pointer-events:none;
-}
-
-.intro-box{
-  position: relative;
-  z-index: 5;
-  transform-style: preserve-3d;
-  animation: introEnter 1.2s ease forwards;
-}
-
-@keyframes introEnter{
-  0%{
-    opacity:0;
-    transform: scale(.55);
-    filter: blur(10px);
-  }
-  100%{
-    opacity:1;
-    transform: scale(1);
-    filter: blur(0px);
-  }
-}
-
-.intro-logo{
-  width: min(560px, 86vw);
-  height: auto;
-  object-fit: contain;
-
-  transform-style: preserve-3d;
-  animation: introFloat 3.0s ease-in-out infinite;
-
-  filter:
-    drop-shadow(0 25px 90px rgba(0,0,0,.70))
-    drop-shadow(0 0 60px rgba(124,58,237,.30))
-    drop-shadow(0 0 70px rgba(6,182,212,.22));
-}
-
-@keyframes introFloat{
-  0%{
-    transform: perspective(1200px) rotateX(10deg) rotateY(-12deg) translateY(0);
-  }
-  50%{
-    transform: perspective(1200px) rotateX(-10deg) rotateY(12deg) translateY(-10px);
-  }
-  100%{
-    transform: perspective(1200px) rotateX(10deg) rotateY(-12deg) translateY(0);
-  }
-}
-
-*/
-
-/* Project buttons */
-.project-actions{
-  display:flex;
-  gap:10px;
-  margin-top: 14px;
-  flex-wrap: wrap;
-}
-
-/* Clinic thumbnail (custom style) */
-.clinic-thumb{
-  background: linear-gradient(135deg,
-    rgba(124,58,237,.22),
-    rgba(6,182,212,.12),
-    rgba(34,197,94,.10)
-  );
-  position: relative;
-  overflow:hidden;
-}
-
-.clinic-thumb::before{
-  content:"";
-  position:absolute;
-  inset:-40%;
-  background: radial-gradient(circle at 25% 25%, rgba(255,255,255,.22), transparent 55%),
-              radial-gradient(circle at 75% 65%, rgba(34,197,94,.16), transparent 60%),
-              radial-gradient(circle at 55% 45%, rgba(6,182,212,.18), transparent 60%);
-  transform: rotate(-10deg);
-}
-
-/* Small fake UI lines inside thumbnail */
-.clinic-thumb::after{
-  content:"";
-  position:absolute;
-  left: 18px;
-  top: 18px;
-  width: 60%;
-  height: 8px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.16);
-  box-shadow:
-    0 18px 0 rgba(255,255,255,.10),
-    0 36px 0 rgba(255,255,255,.08),
-    0 54px 0 rgba(255,255,255,.06);
-}
-
-/* Restaurant */
-.restaurant-thumb{
-  background: linear-gradient(135deg,
-    rgba(249,115,22,.20),
-    rgba(124,58,237,.12),
-    rgba(255,255,255,.06)
-  );
-  position: relative;
-  overflow:hidden;
-}
-.restaurant-thumb::before{
-  content:"";
-  position:absolute;
-  inset:-40%;
-  background: radial-gradient(circle at 30% 35%, rgba(255,255,255,.18), transparent 55%),
-              radial-gradient(circle at 70% 60%, rgba(249,115,22,.22), transparent 60%),
-              radial-gradient(circle at 55% 50%, rgba(124,58,237,.16), transparent 60%);
-  transform: rotate(-8deg);
-}
-.restaurant-thumb::after{
-  content:"";
-  position:absolute;
-  left: 18px;
-  top: 18px;
-  width: 42%;
-  height: 8px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.16);
-  box-shadow:
-    0 18px 0 rgba(255,255,255,.10),
-    0 36px 0 rgba(255,255,255,.08),
-    0 54px 0 rgba(255,255,255,.06);
-}
-
-/* Automation */
-.automation-thumb{
-  background: linear-gradient(135deg,
-    rgba(34,197,94,.16),
-    rgba(6,182,212,.12),
-    rgba(124,58,237,.12)
-  );
-  position: relative;
-  overflow:hidden;
-}
-.automation-thumb::before{
-  content:"";
-  position:absolute;
-  inset:-40%;
-  background: radial-gradient(circle at 25% 35%, rgba(34,197,94,.18), transparent 55%),
-              radial-gradient(circle at 75% 60%, rgba(6,182,212,.18), transparent 60%),
-              radial-gradient(circle at 55% 45%, rgba(255,255,255,.14), transparent 60%);
-  transform: rotate(-10deg);
-}
-.automation-thumb::after{
-  content:"";
-  position:absolute;
-  left: 18px;
-  top: 18px;
-  width: 52%;
-  height: 8px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.16);
-  box-shadow:
-    0 18px 0 rgba(255,255,255,.10),
-    0 36px 0 rgba(255,255,255,.08),
-    0 54px 0 rgba(255,255,255,.06);
-}
-
-.albaraa-thumb{
-  background: linear-gradient(135deg,
-    rgba(6,182,212,.18),
-    rgba(34,197,94,.10),
-    rgba(124,58,237,.10)
-  );
-  position: relative;
-  overflow:hidden;
-}
-
-.albaraa-thumb::before{
-  content:"";
-  position:absolute;
-  inset:-40%;
-  background:
-    radial-gradient(circle at 25% 25%, rgba(255,255,255,.18), transparent 55%),
-    radial-gradient(circle at 70% 60%, rgba(6,182,212,.22), transparent 60%),
-    radial-gradient(circle at 55% 45%, rgba(34,197,94,.14), transparent 60%);
-  transform: rotate(-10deg);
-}
-
-.albaraa-thumb::after{
-  content:"";
-  position:absolute;
-  left: 18px;
-  top: 18px;
-  width: 55%;
-  height: 8px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.16);
-  box-shadow:
-    0 18px 0 rgba(255,255,255,.10),
-    0 36px 0 rgba(255,255,255,.08),
-    0 54px 0 rgba(255,255,255,.06);
-}
-/* =========================
-   Contact icon buttons (PRO)
-========================= */
-.contact-icons-pro{
-  display:flex;
-  gap: 54px;
-  flex-wrap: wrap;
-  margin-top: 84px;
-}
-
-.cbtn{
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.12);
-
-  /* Gradient background */
-  background: radial-gradient(circle at 30% 30%,
-      rgba(255,255,255,.20),
-      rgba(255,255,255,.06) 35%,
-      rgba(255,255,255,.03) 70%),
-    linear-gradient(135deg,
-      rgba(124,58,237,.55),
-      rgba(6,182,212,.35),
-      rgba(34,197,94,.20)
-    );
-
-  display:grid;
-  place-items:center;
-  cursor:pointer;
-  transition: .25s ease;
-  position: relative;
-  overflow:hidden;
-  box-shadow: 0 18px 50px rgba(0,0,0,.35);
-}
-
-/* Hover glow */
-.cbtn:hover{
-  transform: translateY(-3px) scale(1.03);
-  box-shadow:
-    0 24px 70px rgba(0,0,0,.45),
-    0 0 0 6px rgba(124,58,237,.12),
-    0 0 0 12px rgba(6,182,212,.08);
-}
-
-/* White glossy layer */
-.cbtn::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: radial-gradient(circle at 30% 20%,
-    rgba(255,255,255,.22),
-    transparent 55%);
-  pointer-events:none;
-}
-
-/* Shine sweep */
-.cbtn::after{
-  content:"";
-  position:absolute;
-  inset:-50%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
-  transform: rotate(25deg);
-  animation: shine 6s linear infinite;
-  opacity:.45;
-  pointer-events:none;
-}
-
-/* Make icons look clean */
-.cbtn svg{
-  width: 22px;
-  height: 22px;
-  color: rgba(255,255,255,.92);
-  filter: drop-shadow(0 10px 25px rgba(0,0,0,.35));
-}
-
-/* Reveal box under icons */
-.contact-reveal{
-  margin-top: 38px;
-  padding: 14px;
-  border-radius: 18px;
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,.04);
-  display:none;
-}
-
-.contact-reveal{
-  animation: pop .25s ease;
-}
-
-@keyframes pop{
-  from{ transform: translateY(8px); opacity:0; }
-  to{ transform: translateY(0); opacity:1; }
-}
-
-.contact-reveal.show{
-  display:block;
-}
-
-.contact-reveal .row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  flex-wrap: wrap;
-}
-
-.contact-reveal strong{
-  font-size: 13px;
-}
-
-.contact-reveal span{
-  font-size: 13px;
-  color: var(--muted);
-  word-break: break-word;
-}
-
-.copy-btn{
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,.06);
-  color: var(--text);
-  padding: 8px 12px;
-  border-radius: 999px;
-  font-size: 12px;
-  cursor:pointer;
-  transition: .2s ease;
-}
-
-.copy-btn:hover{
-  background: rgba(255,255,255,.10);
-  transform: translateY(-1px);
-}
-
-/* Make Instagram bigger */
-
-.insta-btn svg{
-  width: 42px;
-  height: 42px;
-}
-
-/* =========================
-   MOBILE DESKTOP SIMULATION
-   (Force desktop layout on mobile)
-========================= */
-
-/* Disable user zoom and force fixed view */
-@media (max-width: 768px) {
-  body {
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-    touch-action: manipulation;
-    overflow-x: auto;
-    min-width: 1120px !important; /* Force minimum desktop width */
-  }
-
-  html {
-    overflow-x: auto;
-  }
-
-  /* Main container */
-  .wrap {
-    min-width: 1120px !important;
-    width: 1120px !important;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-
-  /* Disable mobile-specific styles */
-  .hamburger {
-    display: none !important;
-  }
-  
-  .mobile {
-    display: none !important;
-  }
-  
-  nav ul {
-    display: flex !important;
-  }
-
-  /* Reset responsive grid to desktop */
-  .grid-hero {
-    grid-template-columns: 1.25fr .75fr !important;
-    gap: 26px !important;
-  }
-  
-  .col-4 {
-    grid-column: span 4 !important;
-  }
-  
-  .col-6 {
-    grid-column: span 6 !important;
-  }
-  
-  .col-8 {
-    grid-column: span 8 !important;
-  }
-  
-  .col-12 {
-    grid-column: span 12 !important;
-  }
-
-  /* Adjust spacing for better touch */
-  .btn {
-    padding: 14px 18px !important;
-    min-height: 44px;
-  }
-  
-  nav a {
-    padding: 12px 14px !important;
-    font-size: 14px !important;
-  }
-
-  /* Make sure header stays fixed */
-  header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: var(--bg);
-    padding: 10px 0;
-    margin-top: 0;
-  }
-  
-  .nav {
-    border-radius: 20px !important;
-    padding: 10px 20px !important;
-  }
-
-  /* Adjust font sizes for readability */
-  h1 {
-    font-size: 42px !important;
-    line-height: 1.1 !important;
-  }
-  
-  .lead {
-    font-size: 18px !important;
-    line-height: 1.6 !important;
-  }
-
-  /* Scroll indicator */
-  body::after {
-    content: "← Scroll →";
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: rgba(124, 58, 237, 0.9);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 14px;
-    z-index: 1000;
-    pointer-events: none;
-    animation: pulse 2s infinite;
-  }
-  
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-  }
-
-  /* Hide mobile menu completely */
-  #mobileMenu {
-    display: none !important;
-  }
-  
-  /* Force horizontal scroll indicator */
-  html {
-    background: linear-gradient(to right, 
-      rgba(124, 58, 237, 0.1) 1px, 
-      transparent 1px
-    ) 0 0 / 1120px 100%;
-  }
-}
-
-/* For very small screens (iPhone SE etc) */
-@media (max-width: 375px) {
-  body {
-    min-width: 1120px !important;
-  }
-  
-  .wrap {
-    padding: 0 15px !important;
-  }
-  
-  h1 {
-    font-size: 36px !important;
-  }
-  
-  .chip, .tag {
-    font-size: 11px !important;
-    padding: 6px 8px !important;
-  }
-}
-
-/* Prevent accidental zoom on double-tap */
-* {
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Better touch targets */
-button, 
-a.btn, 
-input[type="submit"],
-.cbtn {
-  min-height: 44px;
-  min-width: 44px;
-}
-
-/* Chatbot adjustments for mobile */
-@media (max-width: 768px) {
-  #reqBot {
-    width: 320px;
-    right: 10px;
-    bottom: 100px;
-  }
-  
-  #reqToggle {
-    width: 50px;
-    height: 50px;
-    bottom: 30px;
-    right: 15px;
-  }
-}
-
-@media (max-width: 768px) {
-  .grid-hero {
-    grid-template-columns: 1.25fr .75fr !important;
-    gap: 26px !important;
-  }
-  
-  .col-4 {
-    grid-column: span 4 !important;
-  }
-  
-  .col-6 {
-    grid-column: span 6 !important;
-  }
-  
-  .col-8 {
-    grid-column: span 8 !important;
-  }
-  
-  .col-12 {
-    grid-column: span 12 !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .hamburger {
-    display: none !important;
-  }
-  
-  .mobile {
-    display: none !important;
-  }
-  
-  nav ul {
-    display: flex !important;
-  }
-  
-  #mobileMenu {
-    display: none !important;
-  }
-}
-
+      position: fixed;
+      right: 18px;
+      bottom: 80px;
+      z-index: 100;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: none;
+      background: linear-gradient(135deg, #7c3aed, #06b6d4);
+      color:#fff;
+      font-size:22px;
+      cursor:pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+
+    #reqBot{
+      position: fixed;
+      right: 18px;
+      bottom: 150px;
+      width: 340px;
+      max-height: 460px;
+      background: #0b1020;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 100;
+    }
+
+    #reqBot .chat-header{
+      padding: 12px;
+      font-weight: 700;
+      background: rgba(255,255,255,.08);
+    }
+
+    #reqBot .chat-messages{
+      padding: 12px;
+      flex: 1;
+      overflow-y: auto;
+      font-size: 13px;
+    }
+
+    #reqBot .msg{
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    #reqBot .msg.bot{ color:#fff; }
+    #reqBot .msg.user{ color:#22c55e; }
+
+    #reqBot .chat-input{
+      display:flex;
+      border-top:1px solid var(--line);
+    }
+
+    #reqBot .chat-input input{
+      flex:1;
+      padding:10px;
+      border:none;
+      outline:none;
+      background:#070a13;
+      color:#fff;
+    }
+
+    #reqBot .chat-input button{
+      padding:10px 14px;
+      border:none;
+      background:#7c3aed;
+      color:#fff;
+      cursor:pointer;
+    }
+
+    #reqBot .chat-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    #reqBot .chat-actions{
+      display:flex;
+      gap:8px;
+    }
+
+    #reqBot .chat-actions button{
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color:#fff;
+      cursor:pointer;
+      font-size: 15px;
+      transition: .2s ease;
+    }
+
+    #reqBot .chat-actions button:hover{
+      background: rgba(255,255,255,.12);
+      transform: translateY(-1px);
+    }
+
+    /* INTRO OVERLAY */
+    #introOverlay{
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: radial-gradient(circle at 50% 40%, rgba(124,58,237,.20), transparent 60%),
+                  radial-gradient(circle at 60% 55%, rgba(6,182,212,.18), transparent 55%),
+                  radial-gradient(circle at 35% 75%, rgba(34,197,94,.10), transparent 60%),
+                  #050712;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      transition: opacity .6s ease, visibility .6s ease;
+    }
+
+    #introOverlay.hide{
+      opacity: 0;
+      visibility: hidden;
+      pointer-events:none;
+    }
+
+    /* Neural background layer */
+    .intro-neural{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      opacity: .55;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(6,182,212,.25), transparent 55%),
+        linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size:
+        100% 100%,
+        60px 60px,
+        60px 60px;
+      filter: blur(.2px);
+      animation: gridMove 8s linear infinite;
+    }
+
+    @keyframes gridMove{
+      0%{ transform: translateY(0px) scale(1.05); }
+      100%{ transform: translateY(120px) scale(1.05); }
+    }
+
+    #introOverlay::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(circle at 50% 50%,
+                  rgba(255,255,255,.14),
+                  rgba(124,58,237,.10),
+                  transparent 60%);
+      opacity: .8;
+      pointer-events:none;
+    }
+
+    #introOverlay::after{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+      transform: rotate(25deg);
+      animation: introShine 3.5s linear infinite;
+      pointer-events:none;
+    }
+
+    @keyframes introShine{
+      0%{ transform: translateX(-30%) rotate(25deg); }
+      100%{ transform: translateX(30%) rotate(25deg); }
+    }
+
+    .intro-box{
+      position: relative;
+      z-index: 5;
+      transform-style: preserve-3d;
+      animation: introEnter 1.2s ease forwards;
+    }
+
+    @keyframes introEnter{
+      0%{
+        opacity:0;
+        transform: scale(.6);
+        filter: blur(8px);
+      }
+      100%{
+        opacity:1;
+        transform: scale(1);
+        filter: blur(0px);
+      }
+    }
+
+    .intro-logo{
+      width: min(520px, 82vw);
+      height: auto;
+      object-fit: contain;
+      transform-style: preserve-3d;
+      animation: introFloat 2.8s ease-in-out infinite;
+      filter:
+        drop-shadow(0 25px 90px rgba(0,0,0,.70))
+        drop-shadow(0 0 60px rgba(124,58,237,.30))
+        drop-shadow(0 0 70px rgba(6,182,212,.20));
+    }
+
+    @keyframes introFloat{
+      0%{
+        transform: perspective(1100px) rotateX(12deg) rotateY(-14deg) translateY(0);
+      }
+      50%{
+        transform: perspective(1100px) rotateX(-12deg) rotateY(14deg) translateY(-10px);
+      }
+      100%{
+        transform: perspective(1100px) rotateX(12deg) rotateY(-14deg) translateY(0);
+      }
+    }
+
+    /* Project buttons */
+    .project-actions{
+      display:flex;
+      gap:10px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* Contact icon buttons */
+    .contact-icons-pro{
+      display:flex;
+      gap: 54px;
+      flex-wrap: wrap;
+      margin-top: 84px;
+    }
+
+    .cbtn{
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.12);
+      background: radial-gradient(circle at 30% 30%,
+          rgba(255,255,255,.20),
+          rgba(255,255,255,.06) 35%,
+          rgba(255,255,255,.03) 70%),
+        linear-gradient(135deg,
+          rgba(124,58,237,.55),
+          rgba(6,182,212,.35),
+          rgba(34,197,94,.20)
+        );
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      transition: .25s ease;
+      position: relative;
+      overflow:hidden;
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+    }
+
+    .cbtn:hover{
+      transform: translateY(-3px) scale(1.03);
+      box-shadow:
+        0 24px 70px rgba(0,0,0,.45),
+        0 0 0 6px rgba(124,58,237,.12),
+        0 0 0 12px rgba(6,182,212,.08);
+    }
+
+    .cbtn::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(circle at 30% 20%,
+        rgba(255,255,255,.22),
+        transparent 55%);
+      pointer-events:none;
+    }
+
+    .cbtn::after{
+      content:"";
+      position:absolute;
+      inset:-50%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
+      transform: rotate(25deg);
+      animation: shine 6s linear infinite;
+      opacity:.45;
+      pointer-events:none;
+    }
+
+    .cbtn svg{
+      width: 22px;
+      height: 22px;
+      color: rgba(255,255,255,.92);
+      filter: drop-shadow(0 10px 25px rgba(0,0,0,.35));
+    }
+
+    .contact-reveal{
+      margin-top: 38px;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      display:none;
+      animation: pop .25s ease;
+    }
+
+    @keyframes pop{
+      from{ transform: translateY(8px); opacity:0; }
+      to{ transform: translateY(0); opacity:1; }
+    }
+
+    .contact-reveal.show{
+      display:block;
+    }
+
+    .contact-reveal .row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap: wrap;
+    }
+
+    .contact-reveal strong{
+      font-size: 13px;
+    }
+
+    .contact-reveal span{
+      font-size: 13px;
+      color: var(--muted);
+      word-break: break-word;
+    }
+
+    .copy-btn{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      cursor:pointer;
+      transition: .2s ease;
+    }
+
+    .copy-btn:hover{
+      background: rgba(255,255,255,.10);
+      transform: translateY(-1px);
+    }
+
+    /* Instagram button bigger */
+    .insta-btn svg{
+      width: 42px;
+      height: 42px;
+    }
+
+    /* Prevent zoom on iOS */
+    @supports (-webkit-touch-callout: none) {
+      input,
+      textarea {
+        font-size: 16px !important;
+      }
+    }
   </style>
 </head>
 
 <body>
+  <!-- INTRO OVERLAY -->
+  <div id="introOverlay">
+    <div class="intro-box">
+      <img src="assets/logo.png" alt="Ahmad Arab Logo" class="intro-logo">
+    </div>
+  </div>
+
   <div id="top"></div>
 
   <header class="wrap">
@@ -1513,13 +1124,6 @@ input[type="submit"],
           </svg>
         </button>
       </div>
-    </div>
-
-    <div class="mobile" id="mobileMenu" hidden>
-      <a href="#services">Services</a>
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
     </div>
   </header>
 
@@ -1574,7 +1178,7 @@ input[type="submit"],
           <div class="p-top">
             <div>
               <div class="avatar">
-                  <img src="assets/logo.png" alt="Ahmad Arab Logo">
+                <img src="assets/logo.png" alt="Ahmad Arab Logo">
               </div>
 
               <div class="p-name">Ahmad Arab</div>
@@ -1594,21 +1198,21 @@ input[type="submit"],
           </div>
 
           <div class="stats">
-  <div class="stat">
-    <strong id="projectsCount">0</strong>
-    <span>Projects (demo + real)</span>
-  </div>
+            <div class="stat">
+              <strong id="projectsCount">0</strong>
+              <span>Projects (demo + real)</span>
+            </div>
 
-  <div class="stat">
-    <strong id="performanceScore">—</strong>
-    <span>Performance score</span>
-  </div>
+            <div class="stat">
+              <strong id="performanceScore">—</strong>
+              <span>Performance score</span>
+            </div>
 
-  <div class="stat">
-    <strong>24h</strong>
-    <span>Fast response time</span>
-  </div>
-</div>
+            <div class="stat">
+              <strong>24h</strong>
+              <span>Fast response time</span>
+            </div>
+          </div>
 
           <div class="p-actions">
             <a class="btn" href="#services">Services</a>
@@ -1620,64 +1224,63 @@ input[type="submit"],
 
     <!-- SERVICES -->
     <section id="services" class="wrap">
-  <div class="section-title reveal">
-    <div>
-      <h2>Services</h2>
-      <p class="sub">Professional development services, clean code, and fast delivery from Java systems to modern web apps.</p>
-    </div>
-  </div>
+      <div class="section-title reveal">
+        <div>
+          <h2>Services</h2>
+          <p class="sub">Professional development services, clean code, and fast delivery from Java systems to modern web apps.</p>
+        </div>
+      </div>
 
-  <div class="grid">
-    <div class="card service col-4 reveal">
-      <div class="mini" aria-hidden="true">🌐</div>
-      <h3>Web Development</h3>
-      <p>
-        Responsive websites and modern web apps using HTML, CSS, JavaScript, React, and Next.js.
-      </p>
-    </div>
+      <div class="grid">
+        <div class="card service col-4 reveal">
+          <div class="mini" aria-hidden="true">🌐</div>
+          <h3>Web Development</h3>
+          <p>
+            Responsive websites and modern web apps using HTML, CSS, JavaScript, React, and Next.js.
+          </p>
+        </div>
 
-    <div class="card service col-4 reveal">
-      <div class="mini" aria-hidden="true">☕</div>
-      <h3>Java Applications (JavaFX)</h3>
-      <p>
-        Desktop applications with clean GUI interfaces, structured code, and professional layout.
-      </p>
-    </div>
+        <div class="card service col-4 reveal">
+          <div class="mini" aria-hidden="true">☕</div>
+          <h3>Java Applications (JavaFX)</h3>
+          <p>
+            Desktop applications with clean GUI interfaces, structured code, and professional layout.
+          </p>
+        </div>
 
-    <div class="card service col-4 reveal">
-      <div class="mini" aria-hidden="true">⚙️</div>
-      <h3>Backend Development (Spring Boot)</h3>
-      <p>
-        REST APIs, backend systems, integrations, and scalable server-side solutions.
-      </p>
-    </div>
+        <div class="card service col-4 reveal">
+          <div class="mini" aria-hidden="true">⚙️</div>
+          <h3>Backend Development (Spring Boot)</h3>
+          <p>
+            REST APIs, backend systems, integrations, and scalable server-side solutions.
+          </p>
+        </div>
 
-    <div class="card service col-4 reveal">
-      <div class="mini" aria-hidden="true">🛠️</div>
-      <h3>Code Fixing & Debugging</h3>
-      <p>
-        Fix errors, optimize performance, refactor code, and improve project structure.
-      </p>
-    </div>
+        <div class="card service col-4 reveal">
+          <div class="mini" aria-hidden="true">🛠️</div>
+          <h3>Code Fixing & Debugging</h3>
+          <p>
+            Fix errors, optimize performance, refactor code, and improve project structure.
+          </p>
+        </div>
 
-    <div class="card service col-4 reveal">
-      <div class="mini" aria-hidden="true">🎓</div>
-      <h3>University Projects Support</h3>
-      <p>
-        Help with Java projects, GUI assignments, and explaining code step-by-step.
-      </p>
-    </div>
+        <div class="card service col-4 reveal">
+          <div class="mini" aria-hidden="true">🎓</div>
+          <h3>University Projects Support</h3>
+          <p>
+            Help with Java projects, GUI assignments, and explaining code step-by-step.
+          </p>
+        </div>
 
-    <div class="card service col-4 reveal">
-      <div class="mini" aria-hidden="true">🧾</div>
-      <h3>CV + Logo + Video Editing</h3>
-      <p>
-        Professional German Lebenslauf writing, modern logo design, and video montage for projects.
-      </p>
-    </div>
-  </div>
-</section>
-
+        <div class="card service col-4 reveal">
+          <div class="mini" aria-hidden="true">🧾</div>
+          <h3>CV + Logo + Video Editing</h3>
+          <p>
+            Professional German Lebenslauf writing, modern logo design, and video montage for projects.
+          </p>
+        </div>
+      </div>
+    </section>
 
     <!-- WORK -->
     <section id="work" class="wrap">
@@ -1690,105 +1293,80 @@ input[type="submit"],
 
       <div class="grid">
         <article class="card project col-4 reveal">
-  <div class="thumb" style="background-image:url('assets/Clinic.webp'); background-size:cover; background-position:center;" aria-hidden="true"></div>
+          <div class="thumb" style="background-image:url('assets/Clinic.webp'); background-size:cover; background-position:center;" aria-hidden="true"></div>
+          <h3>Clinic Booking Website</h3>
+          <p>
+            A modern clinic website with responsive design, appointment booking form,
+            SEO optimization, and ultra-fast loading — ideal for doctors and small clinics.
+          </p>
+          <div class="tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">SEO</span>
+          </div>
+          <div class="project-actions">
+            <a class="btn primary" href="https://ahamdarab.github.io/Clinic/" target="_blank" rel="noopener noreferrer">Live Demo</a>
+            <a class="btn" href="https://github.com/AhamdArab/Clinic.git" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </article>
 
+        <article class="card project col-4 reveal">
+          <div class="thumb" style="background-image:url('assets/Restaurant.jpg'); background-size:cover; background-position:center;" aria-hidden="true"></div>
+          <h3>Restaurant Menu + Orders</h3>
+          <p>
+            A modern restaurant website with a digital menu, WhatsApp ordering,
+            Google Maps integration, and multilingual support for more customers.
+          </p>
+          <div class="tags">
+            <span class="tag">UI</span>
+            <span class="tag">Mobile</span>
+            <span class="tag">WhatsApp</span>
+            <span class="tag">Maps</span>
+          </div>
+          <div class="project-actions">
+            <a class="btn primary" href="https://ahamdarab.github.io/Restaurant-/" target="_blank" rel="noopener noreferrer">Live Demo</a>
+            <a class="btn" href="https://github.com/AhamdArab/Restaurant-.git" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </article>
 
-  <h3>Clinic Booking Website</h3>
+        <article class="card project col-4 reveal">
+          <div class="thumb" style="background-image:url('assets/Dashboard.webp'); background-size:cover; background-position:center;" aria-hidden="true"></div>
+          <h3>Automation Dashboard</h3>
+          <p>
+            A clean dashboard that organizes leads and client requests automatically,
+            saving hours every week with integrations and workflow automation.
+          </p>
+          <div class="tags">
+            <span class="tag">Automation</span>
+            <span class="tag">APIs</span>
+            <span class="tag">Dashboard</span>
+            <span class="tag">Integrations</span>
+          </div>
+          <div class="project-actions">
+            <a class="btn primary" href="https://ahamdarab.github.io/Dashboard/" target="_blank" rel="noopener noreferrer">Live Demo</a>
+            <a class="btn" href="https://github.com/AhamdArab/Dashboard.git" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </article>
 
-  <p>
-    A modern clinic website with responsive design, appointment booking form,
-    SEO optimization, and ultra-fast loading — ideal for doctors and small clinics.
-  </p>
-
-  <div class="tags">
-    <span class="tag">HTML</span>
-    <span class="tag">CSS</span>
-    <span class="tag">JavaScript</span>
-    <span class="tag">SEO</span>
-  </div>
-
-  <div class="project-actions">
-    <a class="btn primary" href="https://ahamdarab.github.io/Clinic/" target="_blank" rel="noopener noreferrer">Live Demo</a>
-    <a class="btn" href="https://github.com/AhamdArab/Clinic.git" target="_blank" rel="noopener noreferrer">GitHub</a>
-  </div>
-</article>
-
-
-        <!-- Project 2 -->
-    <article class="card project col-4 reveal">
-      <div class="thumb" style="background-image:url('assets/Restaurant.jpg'); background-size:cover; background-position:center;" aria-hidden="true"></div>
-
-
-      <h3>Restaurant Menu + Orders</h3>
-
-      <p>
-        A modern restaurant website with a digital menu, WhatsApp ordering,
-        Google Maps integration, and multilingual support for more customers.
-      </p>
-
-      <div class="tags">
-        <span class="tag">UI</span>
-        <span class="tag">Mobile</span>
-        <span class="tag">WhatsApp</span>
-        <span class="tag">Maps</span>
-      </div>
-
-      <div class="project-actions">
-        <a class="btn primary" href="https://ahamdarab.github.io/Restaurant-/" target="_blank" rel="noopener noreferrer">Live Demo</a>
-        <a class="btn" href="https://github.com/AhamdArab/Restaurant-.git" target="_blank" rel="noopener noreferrer">GitHub</a>
-      </div>
-    </article>
-
-        <!-- Project 3 -->
-    <article class="card project col-4 reveal">
-      <div class="thumb" style="background-image:url('assets/Dashboard.webp'); background-size:cover; background-position:center;" aria-hidden="true"></div>
-
-
-      <h3>Automation Dashboard</h3>
-
-      <p>
-        A clean dashboard that organizes leads and client requests automatically,
-        saving hours every week with integrations and workflow automation.
-      </p>
-
-      <div class="tags">
-        <span class="tag">Automation</span>
-        <span class="tag">APIs</span>
-        <span class="tag">Dashboard</span>
-        <span class="tag">Integrations</span>
-      </div>
-
-      <div class="project-actions">
-        <a class="btn primary" href="https://ahamdarab.github.io/Dashboard/" target="_blank" rel="noopener noreferrer">Live Demo</a>
-        <a class="btn" href="https://github.com/AhamdArab/Dashboard.git" target="_blank" rel="noopener noreferrer">GitHub</a>
-      </div>
-    </article>
-
-
-    <article class="card project col-4 reveal">
-  <div class="thumb" style="background-image:url('assets/Cooling.avif'); background-size:cover; background-position:center;" aria-hidden="true"></div>
-
-  <h3>Al Baraa — Cooling Projects</h3>
-
-  <p>
-  Al Baraa ist spezialisiert auf Zentralkühlung und Kühlräume. 
-  Wir liefern komplette Kühl-Lösungen von A bis Z.
-</p>
-
-
-  <div class="tags">
-    <span class="tag">Cooling</span>
-    <span class="tag">Cold Rooms</span>
-    <span class="tag">Central Cooling</span>
-    <span class="tag">Electrical Panels</span>
-  </div>
-
-  <div class="project-actions">
-    <a class="btn primary" href="https://ahamdarab.github.io/albaraacompany/" target="_blank" rel="noopener noreferrer">Live Demo</a>
-    <a class="btn" href="https://github.com/AhamdArab/albaraacompany.git" target="_blank" rel="noopener noreferrer">GitHub</a>
-  </div>
-</article>
-
+        <article class="card project col-4 reveal">
+          <div class="thumb" style="background-image:url('assets/Cooling.avif'); background-size:cover; background-position:center;" aria-hidden="true"></div>
+          <h3>Al Baraa — Cooling Projects</h3>
+          <p>
+            Al Baraa ist spezialisiert auf Zentralkühlung und Kühlräume. 
+            Wir liefern komplette Kühl-Lösungen von A bis Z.
+          </p>
+          <div class="tags">
+            <span class="tag">Cooling</span>
+            <span class="tag">Cold Rooms</span>
+            <span class="tag">Central Cooling</span>
+            <span class="tag">Electrical Panels</span>
+          </div>
+          <div class="project-actions">
+            <a class="btn primary" href="https://ahamdarab.github.io/albaraacompany/" target="_blank" rel="noopener noreferrer">Live Demo</a>
+            <a class="btn" href="https://github.com/AhamdArab/albaraacompany.git" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -1839,59 +1417,57 @@ input[type="submit"],
           </p>
 
           <div class="grid">
-  <div class="card col-6" style="padding:14px; background: rgba(255,255,255,.04);">
-    <strong>Java Development</strong>
-    <p class="sub" style="margin-top:6px;">Java, JavaFX (GUI), OOP, Clean Code, University Projects</p>
-  </div>
+            <div class="card col-6" style="padding:14px; background: rgba(255,255,255,.04);">
+              <strong>Java Development</strong>
+              <p class="sub" style="margin-top:6px;">Java, JavaFX (GUI), OOP, Clean Code, University Projects</p>
+            </div>
 
-  <div class="card col-6" style="padding:14px; background: rgba(255,255,255,.04);">
-    <strong>Backend</strong>
-    <p class="sub" style="margin-top:6px;">Spring Boot, REST APIs, Integrations, Deploy-ready systems</p>
-  </div>
+            <div class="card col-6" style="padding:14px; background: rgba(255,255,255,.04);">
+              <strong>Backend</strong>
+              <p class="sub" style="margin-top:6px;">Spring Boot, REST APIs, Integrations, Deploy-ready systems</p>
+            </div>
 
-  <div class="card col-6" style="padding:14px; background: rgba(255,255,255,.04);">
-    <strong>Frontend</strong>
-    <p class="sub" style="margin-top:6px;">HTML, CSS, JavaScript, Responsive UI, Accessibility</p>
-  </div>
+            <div class="card col-6" style="padding:14px; background: rgba(255,255,255,.04);">
+              <strong>Frontend</strong>
+              <p class="sub" style="margin-top:6px;">HTML, CSS, JavaScript, Responsive UI, Accessibility</p>
+            </div>
 
-  <div class="card col-6" style="padding:14px; background: rgba(255,255,255,.04);">
-    <strong>Modern Web + Other</strong>
-    <p class="sub" style="margin-top:6px;">React, Next.js, Python, C, C++, Debugging, Code Explanation</p>
-  </div>
-</div>
-
+            <div class="card col-6" style="padding:14px; background: rgba(255,255,255,.04);">
+              <strong>Modern Web + Other</strong>
+              <p class="sub" style="margin-top:6px;">React, Next.js, Python, C, C++, Debugging, Code Explanation</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- TESTIMONIALS -->
-<section class="wrap" id="comments">
-  <div class="section-title reveal">
-    <div>
-      <h2>Client Comments</h2>
-      <p class="sub">Real feedback from visitors — powered by GitHub Discussions.</p>
-    </div>
-  </div>
+    <section class="wrap" id="comments">
+      <div class="section-title reveal">
+        <div>
+          <h2>Client Comments</h2>
+          <p class="sub">Real feedback from visitors — powered by GitHub Discussions.</p>
+        </div>
+      </div>
 
-  <div class="card reveal" style="padding:16px;">
-    <script src="https://giscus.app/client.js"
-        data-repo="AhamdArab/Webseite-"
-        data-repo-id="R_kgDORMigMw"
-        data-category="General"
-        data-category-id="DIC_kwDORMigM84C2HQX"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="1"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="de"
-        crossorigin="anonymous"
-        async>
-</script>
-  </div>
-</section>
-
+      <div class="card reveal" style="padding:16px;">
+        <script src="https://giscus.app/client.js"
+            data-repo="AhamdArab/Webseite-"
+            data-repo-id="R_kgDORMigMw"
+            data-category="General"
+            data-category-id="DIC_kwDORMigM84C2HQX"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="1"
+            data-input-position="bottom"
+            data-theme="preferred_color_scheme"
+            data-lang="de"
+            crossorigin="anonymous"
+            async>
+        </script>
+      </div>
+    </section>
 
     <!-- CONTACT -->
     <section id="contact" class="wrap">
@@ -1906,101 +1482,88 @@ input[type="submit"],
 
       <div class="grid">
         <div class="card col-6 reveal" style="padding:16px;">
-          <h3 style="margin:0 0 10px;">Let’s work together</h3>
+          <h3 style="margin:0 0 10px;">Let's work together</h3>
           <p class="sub">
             You can contact me via email, phone, or LinkedIn. For quick projects, send a message with your budget and deadline.
           </p>
 
           <div class="contact-icons-pro">
+            <button class="cbtn" id="emailIcon" type="button" aria-label="Show email">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M21 8v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8"
+                  stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="m3 8 9 6 9-6"
+                  stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </button>
 
-  <!-- Email -->
-  <button class="cbtn" id="emailIcon" type="button" aria-label="Show email">
-    <svg viewBox="0 0 24 24" fill="none">
-      <path d="M21 8v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8"
-        stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-      <path d="m3 8 9 6 9-6"
-        stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-    </svg>
-  </button>
+            <button class="cbtn" id="phoneIcon" type="button" aria-label="Show phone">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M7 4h4l2 5-3 2c1 2 3 4 5 5l2-3 5 2v4c0 1-1 2-2 2C11 21 3 13 3 5c0-1 1-2 2-2h2Z"
+                  stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+            </button>
 
-  <!-- Phone -->
-  <button class="cbtn" id="phoneIcon" type="button" aria-label="Show phone">
-    <svg viewBox="0 0 24 24" fill="none">
-      <path d="M7 4h4l2 5-3 2c1 2 3 4 5 5l2-3 5 2v4c0 1-1 2-2 2C11 21 3 13 3 5c0-1 1-2 2-2h2Z"
-        stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-    </svg>
-  </button>
+            <a class="cbtn" href="https://www.linkedin.com/in/ahmad-arab-433758312" target="_blank" rel="noopener noreferrer" aria-label="Open LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 9H3v12h3V9ZM4.5 3A1.5 1.5 0 1 0 4.5 6 1.5 1.5 0 0 0 4.5 3Z" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M9 9h3v2c.5-1.2 1.9-2.2 3.8-2.2 3 0 5.2 2 5.2 6V21h-3v-5.6c0-2.2-.9-3.5-2.8-3.5-1.8 0-3.2 1.2-3.2 3.6V21H9V9Z"
+                  stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+            </a>
 
-  <!-- LinkedIn -->
-  <a class="cbtn" href="https://www.linkedin.com/in/ahmad-arab-433758312" target="_blank" rel="noopener noreferrer" aria-label="Open LinkedIn">
-    <svg viewBox="0 0 24 24" fill="none">
-      <path d="M6 9H3v12h3V9ZM4.5 3A1.5 1.5 0 1 0 4.5 6 1.5 1.5 0 0 0 4.5 3Z" stroke="currentColor" stroke-width="1.8"/>
-      <path d="M9 9h3v2c.5-1.2 1.9-2.2 3.8-2.2 3 0 5.2 2 5.2 6V21h-3v-5.6c0-2.2-.9-3.5-2.8-3.5-1.8 0-3.2 1.2-3.2 3.6V21H9V9Z"
-        stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-    </svg>
-  </a>
+            <a class="cbtn" href="https://github.com/AhamdArab" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M9 19c-4 1.5-4-2.5-6-3m12 6v-3.5c0-1 .1-1.4-.5-2
+                2.5-.3 5-1.2 5-5.5 0-1.2-.4-2.2-1.2-3
+                .1-.3.5-1.6-.1-3.2 0 0-1-.3-3.2 1.2
+                -1-.3-2-.4-3-.4s-2 .1-3 .4C6.6 1.7 5.6 2 5.6 2
+                5 3.6 5.4 4.9 5.5 5.2
+                4.7 6 4.3 7 4.3 8.2c0 4.3 2.5 5.2 5 5.5
+                -.4.4-.6 1-.6 2V22"
+                  stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
 
-  <!-- GitHub -->
-  <a class="cbtn" href="https://github.com/AhamdArab" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub">
-    <svg viewBox="0 0 24 24" fill="none">
-      <path d="M9 19c-4 1.5-4-2.5-6-3m12 6v-3.5c0-1 .1-1.4-.5-2
-      2.5-.3 5-1.2 5-5.5 0-1.2-.4-2.2-1.2-3
-      .1-.3.5-1.6-.1-3.2 0 0-1-.3-3.2 1.2
-      -1-.3-2-.4-3-.4s-2 .1-3 .4C6.6 1.7 5.6 2 5.6 2
-      5 3.6 5.4 4.9 5.5 5.2
-      4.7 6 4.3 7 4.3 8.2c0 4.3 2.5 5.2 5 5.5
-      -.4.4-.6 1-.6 2V22"
-        stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </a>
+            <a class="cbtn insta-btn"
+               href="https://www.instagram.com/3raba7mad?igsh=MTc3MWUxYnBmZzlwcw=="
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="Open Instagram">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="7" y="7" width="10" height="10" rx="3"
+                  stroke="currentColor" stroke-width="1.8"/>
+                <path d="M10.5 12a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0Z"
+                  stroke="currentColor" stroke-width="1.8"/>
+                <path d="M15.7 8.4h.01"
+                  stroke="currentColor" stroke-width="2.6"
+                  stroke-linecap="round"/>
+              </svg>
+            </a>
+          </div>
 
-  <!-- Instagram -->
-<a class="cbtn insta-btn"
-   href="https://www.instagram.com/3raba7mad?igsh=MTc3MWUxYnBmZzlwcw=="
-   target="_blank"
-   rel="noopener noreferrer"
-   aria-label="Open Instagram">
-  <svg viewBox="0 0 24 24" fill="none">
-    <rect x="7" y="7" width="10" height="10" rx="3"
-      stroke="currentColor" stroke-width="1.8"/>
-    <path d="M10.5 12a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0Z"
-      stroke="currentColor" stroke-width="1.8"/>
-    <path d="M15.7 8.4h.01"
-      stroke="currentColor" stroke-width="2.6"
-      stroke-linecap="round"/>
-  </svg>
-</a>
-
-
-</div>
-
-<!-- Hidden reveal box -->
-<div class="contact-reveal" id="contactRevealBox">
-  <div class="row">
-    <div>
-      <strong id="revealTitle">Email</strong><br>
-      <span id="revealValue"></span>
-    </div>
-
-    <button class="copy-btn" id="copyRevealBtn" type="button">Copy</button>
-  </div>
-</div>
-
+          <div class="contact-reveal" id="contactRevealBox">
+            <div class="row">
+              <div>
+                <strong id="revealTitle">Email</strong><br>
+                <span id="revealValue"></span>
+              </div>
+              <button class="copy-btn" id="copyRevealBtn" type="button">Copy</button>
+            </div>
+          </div>
         </div>
 
         <div class="card col-6 reveal" style="padding:16px;">
           <h3 style="margin:0 0 10px;">Send a message</h3>
-
           <form id="contactForm" action="https://formspree.io/f/mwvnplej" method="POST">
             <input type="text" name="name" placeholder="Your name" required />
             <input type="email" name="email" placeholder="Email address" required />
             <textarea name="message" placeholder="Tell me about your project..." required></textarea>
             <button class="btn primary" id="sendBtn" type="submit">
-                Send Message
-                <span id="formStatus" style="margin-left:8px; color:var(--muted); font-size:12px;"></span>
+              Send Message
+              <span id="formStatus" style="margin-left:8px; color:var(--muted); font-size:12px;"></span>
             </button>
-        </form>
-
+          </form>
         </div>
       </div>
     </section>
@@ -2022,6 +1585,24 @@ input[type="submit"],
 
   <a class="btn top" id="topBtn" href="#top" aria-label="Back to top">⬆</a>
 
+  <!-- Simple Requirements Bot -->
+  <div id="reqBot">
+    <div class="chat-header">
+      <span id="reqTitle">💬 Quick Project Form</span>
+      <div class="chat-actions">
+        <button id="reqRestart" title="Restart">🔄</button>
+        <button id="reqClose" title="Close">✕</button>
+      </div>
+    </div>
+    <div class="chat-messages" id="reqMessages"></div>
+    <div class="chat-input">
+      <input type="text" id="reqInput" placeholder="Type your answer..." />
+      <button id="reqSend">Send</button>
+    </div>
+  </div>
+
+  <button id="reqToggle">💬</button>
+
   <script>
     // --- Helpers
     const $ = (q, p=document) => p.querySelector(q);
@@ -2030,7 +1611,7 @@ input[type="submit"],
     // --- Year
     $("#year").textContent = new Date().getFullYear();
 
-    // --- Mobile menu toggle
+    // --- Mobile menu toggle (disabled on mobile)
     const menuBtn = $("#menuBtn");
     const mobileMenu = $("#mobileMenu");
 
@@ -2080,59 +1661,20 @@ input[type="submit"],
     setActive();
 
     // --- Dynamic stats (Projects count + Performance)
-function updateProfileStats(){
-  // عدد المشاريع الموجودة فعلياً في صفحة work
-  const projects = document.querySelectorAll("#work .project").length;
+    function updateProfileStats(){
+      const projects = document.querySelectorAll("#work .project").length;
+      const projectsEl = document.getElementById("projectsCount");
+      if(projectsEl){
+        projectsEl.textContent = projects;
+      }
 
-  // عرض عدد المشاريع بدون +
-  const projectsEl = document.getElementById("projectsCount");
-  if(projectsEl){
-    projectsEl.textContent = projects;
-  }
+      const performanceEl = document.getElementById("performanceScore");
+      if(performanceEl){
+        performanceEl.textContent = "—";
+      }
+    }
 
-  // الأداء (— لأنه ما عندك تعليقات)
-  const performanceEl = document.getElementById("performanceScore");
-  if(performanceEl){
-    performanceEl.textContent = "—";
-  }
-}
-
-updateProfileStats();
-
-// =========================
-// Giscus -> Performance score
-// =========================
-window.addEventListener("message", (event) => {
-  // giscus sends messages from this origin
-  if (event.origin !== "https://giscus.app") return;
-
-  const data = event.data;
-
-  // We only care about discussion metadata
-  if (!data || !data.giscus) return;
-
-  const meta = data.giscus;
-
-  // meta can include total comment count
-  const totalComments = meta.totalCommentCount;
-
-  if (typeof totalComments !== "number") return;
-
-  const performanceEl = document.getElementById("performanceScore");
-  if (!performanceEl) return;
-
-  // ---- Score logic (you can change it)
-  let score = "—";
-
-  if (totalComments === 0) score = "—";
-  else if (totalComments <= 2) score = "70";
-  else if (totalComments <= 5) score = "85";
-  else if (totalComments <= 10) score = "92";
-  else score = "98";
-
-  performanceEl.textContent = score;
-});
-
+    updateProfileStats();
 
     // --- Reveal on scroll
     const reveals = $$(".reveal");
@@ -2154,183 +1696,172 @@ window.addEventListener("message", (event) => {
     });
 
     // --- Contact form (Formspree AJAX)
-const form = $("#contactForm");
-const status = $("#formStatus");
-const sendBtn = $("#sendBtn");
+    const form = $("#contactForm");
+    const status = $("#formStatus");
+    const sendBtn = $("#sendBtn");
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-  status.textContent = "Sending...";
-  sendBtn.disabled = true;
+      status.textContent = "Sending...";
+      sendBtn.disabled = true;
 
-  try{
-    const formData = new FormData(form);
+      try{
+        const formData = new FormData(form);
 
-    const res = await fetch(form.action, {
-      method: "POST",
-      body: formData,
-      headers: { "Accept": "application/json" }
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: formData,
+          headers: { "Accept": "application/json" }
+        });
+
+        if(res.ok){
+          status.textContent = "Sent ✓";
+          form.reset();
+        }else{
+          status.textContent = "Failed ✗";
+        }
+
+      }catch(err){
+        console.error(err);
+        status.textContent = "Error ✗";
+      }
+
+      setTimeout(() => {
+        status.textContent = "";
+        sendBtn.disabled = false;
+      }, 2500);
     });
 
-    if(res.ok){
-      status.textContent = "Sent ✓";
-      form.reset();
-    }else{
-      status.textContent = "Failed ✗";
-    }
+    // --- Chatbot functionality
+    window.addEventListener("DOMContentLoaded", () => {
+      const reqToggle = document.getElementById("reqToggle");
+      const reqBot = document.getElementById("reqBot");
+      const reqMessages = document.getElementById("reqMessages");
+      const reqInput = document.getElementById("reqInput");
+      const reqSend = document.getElementById("reqSend");
+      const reqTitle = document.getElementById("reqTitle");
+      const reqRestart = document.getElementById("reqRestart");
+      const reqClose = document.getElementById("reqClose");
 
-  }catch(err){
-    console.error(err);
-    status.textContent = "Error ✗";
-  }
+      const FORMSPREE_URL = "https://formspree.io/f/mwvnplej";
 
-  setTimeout(() => {
-    status.textContent = "";
-    sendBtn.disabled = false;
-  }, 2500);
-});
+      let lang = "en";
+      let step = 0;
+      let answers = {};
 
-window.addEventListener("DOMContentLoaded", () => {
+      function detectLanguage(text){
+        const t = text.toLowerCase();
+        const germanWords = [
+          "hallo", "ich", "möchte", "mochte", "brauche", "webseite",
+          "kosten", "preis", "danke", "bitte", "guten", "tag", "projekt"
+        ];
+        if(germanWords.some(w => t.includes(w))) return "de";
+        return "en";
+      }
 
-  const reqToggle = document.getElementById("reqToggle");
-  const reqBot = document.getElementById("reqBot");
-  const reqMessages = document.getElementById("reqMessages");
-  const reqInput = document.getElementById("reqInput");
-  const reqSend = document.getElementById("reqSend");
+      const TEXT = {
+        en: {
+          title: "💬 Quick Project Form",
+          placeholder: "Type your answer...",
+          intro1: "Hi 👋 I'm Ahmad's assistant.",
+          intro2: "I will collect your project requirements and send them directly to Ahmad.",
+          intro3: "You can answer in English or German.",
+          step0: "What service do you need?\n(Website / JavaFX App / Spring Boot / Fix Code / CV / Logo)",
+          step1: "Great! Please describe your project in 1–2 sentences.",
+          step2: "What features do you want? (Example: login, admin panel, payment, booking...)",
+          step3: "What is your budget range? (Example: 100–300€, 300–800€, 800€+)",
+          step4: "What is your deadline? (Example: 3 days, 1 week, 1 month)",
+          step5: "What is your email so Ahmad can reply to you?",
+          sending: "Perfect ✅ Sending your request now...",
+          done: "Done! Ahmad will contact you within 24 hours. 🚀",
+          failed: "Sorry, something failed. Please use the contact form instead.",
+          restarted: "Restarted ✅ Let's start again.",
+          invalid0: "Please choose one of the listed services (Website / JavaFX App / Spring Boot / Fix Code / CV / Logo).",
+          invalid3: "Please enter a budget range (example: 100–300€, 300–800€, 800€+).",
+          invalid5: "Please enter a valid email address (example: name@gmail.com).",
+          invalid: "Please answer as requested so I can submit your request correctly."
+        },
+        de: {
+          title: "💬 Projekt Anfrage",
+          placeholder: "Antwort eingeben...",
+          intro1: "Hallo 👋 Ich bin Ahmads Assistent.",
+          intro2: "Ich sammle deine Projektanforderungen und sende sie direkt an Ahmad.",
+          intro3: "Du kannst auf Deutsch oder Englisch antworten.",
+          step0: "Welche Dienstleistung brauchst du?\n(Webseite / JavaFX App / Spring Boot / Code Fix / Lebenslauf / Logo)",
+          step1: "Super! Bitte beschreibe dein Projekt in 1–2 Sätzen.",
+          step2: "Welche Funktionen brauchst du? (Beispiel: Login, Admin Panel, Zahlung, Buchung...)",
+          step3: "Was ist dein Budget? (Beispiel: 100–300€, 300–800€, 800€+)",
+          step4: "Wann ist die Deadline? (Beispiel: 3 Tage, 1 Woche, 1 Monat)",
+          step5: "Bitte gib deine E-Mail-Adresse ein, damit Ahmad dir antworten kann.",
+          sending: "Perfekt ✅ Deine Anfrage wird jetzt gesendet...",
+          done: "Fertig! Ahmad meldet sich innerhalb von 24 Stunden. 🚀",
+          failed: "Leider ist etwas schiefgelaufen. Bitte nutze das Kontaktformular.",
+          restarted: "Neustart ✅ Wir beginnen von vorne.",
+          invalid0: "Bitte wähle eine der genannten Dienstleistungen (Webseite / JavaFX App / Spring Boot / Code Fix / Lebenslauf / Logo).",
+          invalid3: "Bitte gib ein Budget an (Beispiel: 100–300€, 300–800€, 800€+).",
+          invalid5: "Bitte gib eine gültige E-Mail-Adresse ein (Beispiel: name@gmail.com).",
+          invalid: "Bitte beantworte die Frage passend, damit ich deine Anfrage korrekt weiterleiten kann."
+        }
+      };
 
-  const reqTitle = document.getElementById("reqTitle");
-  const reqRestart = document.getElementById("reqRestart");
-  const reqClose = document.getElementById("reqClose");
+      function addMsg(text, sender){
+        const div = document.createElement("div");
+        div.className = "msg " + sender;
+        div.textContent = text;
+        reqMessages.appendChild(div);
+        reqMessages.scrollTop = reqMessages.scrollHeight;
+      }
 
-  // نفس رابط الفورم عندك (Formspree)
-  const FORMSPREE_URL = "https://formspree.io/f/mwvnplej";
+      function setUIByLang(){
+        reqTitle.textContent = TEXT[lang].title;
+        reqInput.placeholder = TEXT[lang].placeholder;
+      }
 
-  let lang = "en";
-  let step = 0;
-  let answers = {};
+      function isValidAnswer(step, text){
+        const t = text.toLowerCase();
+        if(step === 0){
+          const allowed = [
+            "website", "web", "javafx", "spring", "spring boot",
+            "fix", "debug", "cv", "logo", "video",
+            "webseite", "lebenslauf", "code", "fehler"
+          ];
+          return allowed.some(x => t.includes(x));
+        }
+        if(step === 3){
+          return /(\d+)/.test(t) || t.includes("€") || t.includes("eur");
+        }
+        if(step === 5){
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(text);
+        }
+        return text.length >= 4;
+      }
 
-  function detectLanguage(text){
-    const t = text.toLowerCase();
+      function validationMessage(step){
+        if(step === 0) return TEXT[lang].invalid0;
+        if(step === 3) return TEXT[lang].invalid3;
+        if(step === 5) return TEXT[lang].invalid5;
+        return TEXT[lang].invalid;
+      }
 
-    const germanWords = [
-      "hallo", "ich", "möchte", "mochte", "brauche", "webseite",
-      "kosten", "preis", "danke", "bitte", "guten", "tag", "projekt"
-    ];
+      function getQuestion(step){
+        if(step === 0) return TEXT[lang].step0;
+        if(step === 1) return TEXT[lang].step1;
+        if(step === 2) return TEXT[lang].step2;
+        if(step === 3) return TEXT[lang].step3;
+        if(step === 4) return TEXT[lang].step4;
+        if(step === 5) return TEXT[lang].step5;
+        return "";
+      }
 
-    if(germanWords.some(w => t.includes(w))) return "de";
-    return "en";
-  }
+      function askNext(){
+        if(step <= 5){
+          addMsg(getQuestion(step), "bot");
+        }
+      }
 
-  const TEXT = {
-    en: {
-      title: "💬 Quick Project Form",
-      placeholder: "Type your answer...",
-      intro1: "Hi 👋 I’m Ahmad’s assistant.",
-      intro2: "I will collect your project requirements and send them directly to Ahmad.",
-      intro3: "You can answer in English or German.",
-      step0: "What service do you need?\n(Website / JavaFX App / Spring Boot / Fix Code / CV / Logo)",
-      step1: "Great! Please describe your project in 1–2 sentences.",
-      step2: "What features do you want? (Example: login, admin panel, payment, booking...)",
-      step3: "What is your budget range? (Example: 100–300€, 300–800€, 800€+)",
-      step4: "What is your deadline? (Example: 3 days, 1 week, 1 month)",
-      step5: "What is your email so Ahmad can reply to you?",
-      sending: "Perfect ✅ Sending your request now...",
-      done: "Done! Ahmad will contact you within 24 hours. 🚀",
-      failed: "Sorry, something failed. Please use the contact form instead.",
-      restarted: "Restarted ✅ Let’s start again.",
-
-      invalid0: "Please choose one of the listed services (Website / JavaFX App / Spring Boot / Fix Code / CV / Logo).",
-      invalid3: "Please enter a budget range (example: 100–300€, 300–800€, 800€+).",
-      invalid5: "Please enter a valid email address (example: name@gmail.com).",
-      invalid: "Please answer as requested so I can submit your request correctly."
-    },
-
-    de: {
-      title: "💬 Projekt Anfrage",
-      placeholder: "Antwort eingeben...",
-      intro1: "Hallo 👋 Ich bin Ahmads Assistent.",
-      intro2: "Ich sammle deine Projektanforderungen und sende sie direkt an Ahmad.",
-      intro3: "Du kannst auf Deutsch oder Englisch antworten.",
-      step0: "Welche Dienstleistung brauchst du?\n(Webseite / JavaFX App / Spring Boot / Code Fix / Lebenslauf / Logo)",
-      step1: "Super! Bitte beschreibe dein Projekt in 1–2 Sätzen.",
-      step2: "Welche Funktionen brauchst du? (Beispiel: Login, Admin Panel, Zahlung, Buchung...)",
-      step3: "Was ist dein Budget? (Beispiel: 100–300€, 300–800€, 800€+)",
-      step4: "Wann ist die Deadline? (Beispiel: 3 Tage, 1 Woche, 1 Monat)",
-      step5: "Bitte gib deine E-Mail-Adresse ein, damit Ahmad dir antworten kann.",
-      sending: "Perfekt ✅ Deine Anfrage wird jetzt gesendet...",
-      done: "Fertig! Ahmad meldet sich innerhalb von 24 Stunden. 🚀",
-      failed: "Leider ist etwas schiefgelaufen. Bitte nutze das Kontaktformular.",
-      restarted: "Neustart ✅ Wir beginnen von vorne.",
-
-      invalid0: "Bitte wähle eine der genannten Dienstleistungen (Webseite / JavaFX App / Spring Boot / Code Fix / Lebenslauf / Logo).",
-      invalid3: "Bitte gib ein Budget an (Beispiel: 100–300€, 300–800€, 800€+).",
-      invalid5: "Bitte gib eine gültige E-Mail-Adresse ein (Beispiel: name@gmail.com).",
-      invalid: "Bitte beantworte die Frage passend, damit ich deine Anfrage korrekt weiterleiten kann."
-    }
-  };
-
-  function addMsg(text, sender){
-    const div = document.createElement("div");
-    div.className = "msg " + sender;
-    div.textContent = text;
-    reqMessages.appendChild(div);
-    reqMessages.scrollTop = reqMessages.scrollHeight;
-  }
-
-  function setUIByLang(){
-    reqTitle.textContent = TEXT[lang].title;
-    reqInput.placeholder = TEXT[lang].placeholder;
-  }
-
-  function isValidAnswer(step, text){
-    const t = text.toLowerCase();
-
-    if(step === 0){
-      const allowed = [
-        "website", "web", "javafx", "spring", "spring boot",
-        "fix", "debug", "cv", "logo", "video",
-        "webseite", "lebenslauf", "code", "fehler"
-      ];
-      return allowed.some(x => t.includes(x));
-    }
-
-    if(step === 3){
-      return /(\d+)/.test(t) || t.includes("€") || t.includes("eur");
-    }
-
-    if(step === 5){
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(text);
-    }
-
-    return text.length >= 4;
-  }
-
-  function validationMessage(step){
-    if(step === 0) return TEXT[lang].invalid0;
-    if(step === 3) return TEXT[lang].invalid3;
-    if(step === 5) return TEXT[lang].invalid5;
-    return TEXT[lang].invalid;
-  }
-
-  function getQuestion(step){
-    if(step === 0) return TEXT[lang].step0;
-    if(step === 1) return TEXT[lang].step1;
-    if(step === 2) return TEXT[lang].step2;
-    if(step === 3) return TEXT[lang].step3;
-    if(step === 4) return TEXT[lang].step4;
-    if(step === 5) return TEXT[lang].step5;
-    return "";
-  }
-
-  function askNext(){
-    if(step <= 5){
-      addMsg(getQuestion(step), "bot");
-    }
-  }
-
-  async function sendToEmail(){
-    const message =
+      async function sendToEmail(){
+        const message =
 `📌 New Client Request
 
 Service: ${answers.service || "-"}
@@ -2342,207 +1873,173 @@ Client Email: ${answers.email || "-"}
 
 (Submitted from portfolio chatbot)`;
 
-    await fetch(FORMSPREE_URL, {
-      method: "POST",
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name: "Chatbot Visitor",
-        email: answers.email || "unknown@email.com",
-        message
-      })
-    });
-  }
-
-  function resetBot(){
-    step = 0;
-    answers = {};
-    reqMessages.innerHTML = "";
-
-    setUIByLang();
-
-    addMsg(TEXT[lang].intro1, "bot");
-    addMsg(TEXT[lang].intro2, "bot");
-    addMsg(TEXT[lang].intro3, "bot");
-    addMsg("—", "bot");
-    askNext();
-  }
-
-  async function handleSend(){
-    const text = reqInput.value.trim();
-    if(!text) return;
-
-    reqInput.value = "";
-    addMsg(text, "user");
-
-    // Detect language on first real user message
-    if(step === 0 && reqMessages.children.length <= 5){
-      lang = detectLanguage(text);
-      setUIByLang();
-    }
-
-    if(!isValidAnswer(step, text)){
-      addMsg("⚠️ " + validationMessage(step), "bot");
-      return;
-    }
-
-    if(step === 0) answers.service = text;
-    if(step === 1) answers.description = text;
-    if(step === 2) answers.features = text;
-    if(step === 3) answers.budget = text;
-    if(step === 4) answers.deadline = text;
-    if(step === 5) answers.email = text;
-
-    step++;
-
-    if(step >= 6){
-      addMsg(TEXT[lang].sending, "bot");
-
-      try{
-        await sendToEmail();
-        addMsg(TEXT[lang].done, "bot");
-      }catch(e){
-        console.error(e);
-        addMsg(TEXT[lang].failed, "bot");
+        await fetch(FORMSPREE_URL, {
+          method: "POST",
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            name: "Chatbot Visitor",
+            email: answers.email || "unknown@email.com",
+            message
+          })
+        });
       }
 
-      return;
+      function resetBot(){
+        step = 0;
+        answers = {};
+        reqMessages.innerHTML = "";
+        setUIByLang();
+        addMsg(TEXT[lang].intro1, "bot");
+        addMsg(TEXT[lang].intro2, "bot");
+        addMsg(TEXT[lang].intro3, "bot");
+        addMsg("—", "bot");
+        askNext();
+      }
+
+      async function handleSend(){
+        const text = reqInput.value.trim();
+        if(!text) return;
+
+        reqInput.value = "";
+        addMsg(text, "user");
+
+        if(step === 0 && reqMessages.children.length <= 5){
+          lang = detectLanguage(text);
+          setUIByLang();
+        }
+
+        if(!isValidAnswer(step, text)){
+          addMsg("⚠️ " + validationMessage(step), "bot");
+          return;
+        }
+
+        if(step === 0) answers.service = text;
+        if(step === 1) answers.description = text;
+        if(step === 2) answers.features = text;
+        if(step === 3) answers.budget = text;
+        if(step === 4) answers.deadline = text;
+        if(step === 5) answers.email = text;
+
+        step++;
+
+        if(step >= 6){
+          addMsg(TEXT[lang].sending, "bot");
+          try{
+            await sendToEmail();
+            addMsg(TEXT[lang].done, "bot");
+          }catch(e){
+            console.error(e);
+            addMsg(TEXT[lang].failed, "bot");
+          }
+          return;
+        }
+
+        askNext();
+      }
+
+      // Toggle open/close
+      reqToggle.onclick = () => {
+        const open = reqBot.style.display === "flex";
+        reqBot.style.display = open ? "none" : "flex";
+        if(!open && reqMessages.children.length === 0){
+          resetBot();
+        }
+      };
+
+      // Restart button
+      reqRestart.onclick = () => {
+        resetBot();
+        addMsg(TEXT[lang].restarted, "bot");
+      };
+
+      // Close button
+      reqClose.onclick = () => {
+        reqBot.style.display = "none";
+      };
+
+      reqSend.onclick = handleSend;
+      reqInput.addEventListener("keydown", (e) => {
+        if(e.key === "Enter") handleSend();
+      });
+    });
+
+    // --- Intro overlay auto-hide
+    window.addEventListener("load", () => {
+      const intro = document.getElementById("introOverlay");
+      setTimeout(() => {
+        intro.classList.add("hide");
+      }, 3200);
+    });
+
+    // --- Contact icons reveal + copy
+    const emailIcon = document.getElementById("emailIcon");
+    const phoneIcon = document.getElementById("phoneIcon");
+    const revealBox = document.getElementById("contactRevealBox");
+    const revealTitle = document.getElementById("revealTitle");
+    const revealValue = document.getElementById("revealValue");
+    const copyBtn = document.getElementById("copyRevealBtn");
+
+    const CONTACT = {
+      email: "A7mad3rab1997@gmail.com",
+      phone: "+49 157 33093616"
+    };
+
+    let currentValue = "";
+
+    function showReveal(type){
+      revealBox.classList.add("show");
+      if(type === "email"){
+        revealTitle.textContent = "Email";
+        revealValue.textContent = CONTACT.email;
+        currentValue = CONTACT.email;
+      }
+      if(type === "phone"){
+        revealTitle.textContent = "Phone";
+        revealValue.textContent = CONTACT.phone;
+        currentValue = CONTACT.phone;
+      }
+      copyBtn.textContent = "Copy";
     }
 
-    askNext();
-  }
+    emailIcon.addEventListener("click", () => showReveal("email"));
+    phoneIcon.addEventListener("click", () => showReveal("phone"));
 
-  // Toggle open/close
-  reqToggle.onclick = () => {
-    const open = reqBot.style.display === "flex";
-    reqBot.style.display = open ? "none" : "flex";
+    copyBtn.addEventListener("click", async () => {
+      if(!currentValue) return;
+      try{
+        await navigator.clipboard.writeText(currentValue);
+        copyBtn.textContent = "Copied ✓";
+      }catch(e){
+        copyBtn.textContent = "Failed ✗";
+      }
+      setTimeout(() => {
+        copyBtn.textContent = "Copy";
+      }, 1400);
+    });
 
-    if(!open && reqMessages.children.length === 0){
-      resetBot();
-    }
-  };
+    // Prevent zoom on mobile
+    document.addEventListener('touchstart', function(event) {
+      if (event.touches.length > 1) {
+        event.preventDefault();
+      }
+    }, { passive: false });
 
-  // Restart button
-  reqRestart.onclick = () => {
-    resetBot();
-    addMsg(TEXT[lang].restarted, "bot");
-  };
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function(event) {
+      const now = (new Date()).getTime();
+      if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+      }
+      lastTouchEnd = now;
+    }, false);
 
-  // Close button
-  reqClose.onclick = () => {
-    reqBot.style.display = "none";
-  };
-
-  reqSend.onclick = handleSend;
-
-  reqInput.addEventListener("keydown", (e) => {
-    if(e.key === "Enter") handleSend();
-  });
-
-});
-
-
-
-// =========================
-// Intro overlay auto-hide
-// =========================
-window.addEventListener("load", () => {
-  const intro = document.getElementById("introOverlay");
-
-  // مدة ظهور الافتتاحية
-  setTimeout(() => {
-    intro.classList.add("hide");
-  }, 3200);
-});
-
-// =========================
-// Contact icons reveal + copy
-// =========================
-const emailIcon = document.getElementById("emailIcon");
-const phoneIcon = document.getElementById("phoneIcon");
-
-const revealBox = document.getElementById("contactRevealBox");
-const revealTitle = document.getElementById("revealTitle");
-const revealValue = document.getElementById("revealValue");
-const copyBtn = document.getElementById("copyRevealBtn");
-
-const CONTACT = {
-  email: "A7mad3rab1997@gmail.com",
-  phone: "+49 157 33093616"
-};
-
-let currentValue = "";
-
-function showReveal(type){
-  revealBox.classList.add("show");
-
-  if(type === "email"){
-    revealTitle.textContent = "Email";
-    revealValue.textContent = CONTACT.email;
-    currentValue = CONTACT.email;
-  }
-
-  if(type === "phone"){
-    revealTitle.textContent = "Phone";
-    revealValue.textContent = CONTACT.phone;
-    currentValue = CONTACT.phone;
-  }
-
-  copyBtn.textContent = "Copy";
-}
-
-emailIcon.addEventListener("click", () => showReveal("email"));
-phoneIcon.addEventListener("click", () => showReveal("phone"));
-
-copyBtn.addEventListener("click", async () => {
-  if(!currentValue) return;
-
-  try{
-    await navigator.clipboard.writeText(currentValue);
-    copyBtn.textContent = "Copied ✓";
-  }catch(e){
-    copyBtn.textContent = "Failed ✗";
-  }
-
-  setTimeout(() => {
-    copyBtn.textContent = "Copy";
-  }, 1400);
-});
-
-
+    // Prevent double tap zoom
+    document.addEventListener('dblclick', function(event) {
+      event.preventDefault();
+    }, { passive: false });
   </script>
-
-  <!-- Simple Requirements Bot -->
-<div id="reqBot">
-  <div class="chat-header">
-    <span id="reqTitle">💬 Quick Project Form</span>
-
-    <div class="chat-actions">
-      <button id="reqRestart" title="Restart">🔄</button>
-      <button id="reqClose" title="Close">✕</button>
-    </div>
-  </div>
-
-  <div class="chat-messages" id="reqMessages"></div>
-
-  <div class="chat-input">
-    <input type="text" id="reqInput" placeholder="Type your answer..." />
-    <button id="reqSend">Send</button>
-  </div>
-</div>
-
-<button id="reqToggle">💬</button>
-
-
-<!-- INTRO OVERLAY -->
-<div id="introOverlay">
-  <div class="intro-box">
-    <img src="assets/logo.png" alt="Ahmad Arab Logo" class="intro-logo">
-  </div>
-</div>
-
-
 </body>
 </html>
