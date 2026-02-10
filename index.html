@@ -1422,6 +1422,57 @@ input[type="submit"],
     right: 15px;
   }
 }
+
+/* =========================
+   RESET ZOOM BUTTON (CSS Only)
+========================= */
+@media (max-width: 768px) {
+  .zoom-reset-btn {
+    position: fixed;
+    bottom: 80px; /* فوق زر chatbot */
+    right: 20px;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.95), rgba(6, 182, 212, 0.9));
+    color: white;
+    padding: 12px 16px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    z-index: 1000;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .zoom-reset-btn:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  }
+  
+  .zoom-reset-btn:active {
+    transform: translateY(0);
+  }
+  
+  .zoom-reset-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  /* Zoomed state */
+  body.zoomed {
+    transform: scale(1) !important;
+    transform-origin: top left;
+  }
+}
+
   </style>
 </head>
 
@@ -2469,6 +2520,109 @@ copyBtn.addEventListener("click", async () => {
   }, 1400);
 });
 
+// =========================
+// RESET ZOOM FUNCTION
+// =========================
+
+// إنشاء زر الريست
+const resetBtn = document.createElement('button');
+resetBtn.className = 'zoom-reset-btn';
+resetBtn.innerHTML = `
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M21 8v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8"/>
+    <path d="m3 8 9 6 9-6"/>
+    <circle cx="12" cy="12" r="1"/>
+    <circle cx="19" cy="12" r="1"/>
+    <circle cx="5" cy="12" r="1"/>
+  </svg>
+  Reset Zoom
+`;
+
+document.body.appendChild(resetBtn);
+
+// متغيرات لتتبع الحجم
+let initialScale = 1;
+let currentZoom = 1;
+
+// وظيفة إعادة الحجم إلى 100%
+function resetZoom() {
+  // الطريقة 1: إعادة تعيين viewport
+  const viewportMeta = document.querySelector('meta[name="viewport"]');
+  if (viewportMeta) {
+    viewportMeta.content = 'width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=0.5, user-scalable=yes';
+  }
+  
+  // الطريقة 2: إعادة تعيين CSS transform على body
+  document.body.style.transform = 'scale(1)';
+  document.body.style.transformOrigin = 'top left';
+  document.body.style.width = '100%';
+  document.body.style.overflowX = 'auto';
+  
+  // الطريقة 3: إعادة تعيين scroll
+  window.scrollTo(0, 0);
+  
+  // إظهار تأكيد بصري
+  resetBtn.innerHTML = `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+    </svg>
+    Reset ✓
+  `;
+  resetBtn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+  
+  setTimeout(() => {
+    resetBtn.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 8v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8"/>
+        <path d="m3 8 9 6 9-6"/>
+        <circle cx="12" cy="12" r="1"/>
+        <circle cx="19" cy="12" r="1"/>
+        <circle cx="5" cy="12" r="1"/>
+      </svg>
+      Reset Zoom
+    `;
+    resetBtn.style.background = 'linear-gradient(135deg, rgba(124, 58, 237, 0.95), rgba(6, 182, 212, 0.9))';
+  }, 1500);
+  
+  currentZoom = 1;
+}
+
+// وظيفة الكشف عن التكبير (تقريبية)
+function checkZoomLevel() {
+  const visualViewport = window.visualViewport;
+  if (visualViewport) {
+    const zoom = visualViewport.scale;
+    
+    // إذا كان التكبير مختلفاً عن 100%
+    if (Math.abs(zoom - 1) > 0.1) {
+      currentZoom = zoom;
+      // تظهر الزر دائماً عندما يكون هناك تكبير
+      resetBtn.style.display = 'flex';
+    } else {
+      resetBtn.style.display = 'none';
+    }
+  }
+}
+
+// إضافة حدث الزر
+resetBtn.addEventListener('click', resetZoom);
+
+// مراقبة تغيرات viewport (للكشف عن التكبير)
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', checkZoomLevel);
+  window.visualViewport.addEventListener('scroll', checkZoomLevel);
+}
+
+// كشف تغير اتجاه الشاشة
+window.addEventListener('orientationchange', () => {
+  setTimeout(checkZoomLevel, 300);
+});
+
+// إخفاء الزر في البداية
+resetBtn.style.display = 'none';
+
+// كشف التكبير عند تحميل الصفحة
+setTimeout(checkZoomLevel, 1000);
 
   </script>
 
