@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=1120, initial-scale=1.0" />
   <title>Ahmad Arab — Software Engineer</title>
   <meta name="description" content="Ahmad Arab — Software Engineer. Web Development, Automation, AI Integrations." />
   <meta name="theme-color" content="#0b1020" />
@@ -2989,13 +2989,11 @@ reqClose.onclick = () => {
 window.addEventListener("load", () => {
   const intro = document.getElementById("introOverlay");
 
-  const isMobile = window.innerWidth < 768;
-
+  // مدة ظهور الافتتاحية
   setTimeout(() => {
     intro.classList.add("hide");
-  }, isMobile ? 900 : 1600);
+  }, 3200);
 });
-
 
 // =========================
 // Contact icons reveal + copy
