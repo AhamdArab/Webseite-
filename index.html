@@ -1134,16 +1134,14 @@ body.light #reqBot .chat-input{
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: radial-gradient(circle at 50% 40%, rgba(124,58,237,.20), transparent 60%),
-              radial-gradient(circle at 60% 55%, rgba(6,182,212,.18), transparent 55%),
-              radial-gradient(circle at 35% 75%, rgba(34,197,94,.10), transparent 60%),
-              var(--bg);
+  background: radial-gradient(circle at 50% 45%, rgba(124,58,237,.18), transparent 60%),
+              radial-gradient(circle at 65% 55%, rgba(6,182,212,.14), transparent 55%),
+              #050712;
   display:flex;
   align-items:center;
   justify-content:center;
   overflow:hidden;
-  transition: opacity .35s ease, visibility .35s ease;
-  will-change: opacity, transform;
+  transition: opacity .6s ease, visibility .6s ease;
 }
 
 #introOverlay.hide{
@@ -1152,64 +1150,26 @@ body.light #reqBot .chat-input{
   pointer-events:none;
 }
 
-/* Neural background layer */
-.intro-neural{
+#neuralCanvas{
   position:absolute;
   inset:0;
-  pointer-events:none;
-  opacity: .55;
-
-  /* شبكة + خطوط */
-  background:
-    radial-gradient(circle at 50% 50%, rgba(6,182,212,.25), transparent 55%),
-    linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
-
-  background-size:
-    100% 100%,
-    60px 60px,
-    60px 60px;
-
-  filter: blur(.2px);
-  animation: gridMove 8s linear infinite;
+  width:100%;
+  height:100%;
+  z-index: 1;
 }
 
-/* حركة الشبكة */
-@keyframes gridMove{
-  0%{ transform: translateY(0px) scale(1.05); }
-  100%{ transform: translateY(120px) scale(1.05); }
-}
-
-/* تركيز الإضاءة نحو الشعار */
 #introOverlay::before{
   content:"";
   position:absolute;
   inset:0;
+  z-index:2;
   background: radial-gradient(circle at 50% 50%,
-              rgba(255,255,255,.14),
+              rgba(255,255,255,.12),
               rgba(124,58,237,.10),
               transparent 60%);
-  opacity: .8;
   pointer-events:none;
 }
 
-/* Shine sweep */
-#introOverlay::after{
-  content:"";
-  position:absolute;
-  inset:-40%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
-  transform: rotate(25deg);
-  animation: introShine 3.5s linear infinite;
-  pointer-events:none;
-}
-
-@keyframes introShine{
-  0%{ transform: translateX(-30%) rotate(25deg); }
-  100%{ transform: translateX(30%) rotate(25deg); }
-}
-
-/* Center box */
 .intro-box{
   position: relative;
   z-index: 5;
@@ -1220,8 +1180,8 @@ body.light #reqBot .chat-input{
 @keyframes introEnter{
   0%{
     opacity:0;
-    transform: scale(.6);
-    filter: blur(8px);
+    transform: scale(.55);
+    filter: blur(10px);
   }
   100%{
     opacity:1;
@@ -1230,33 +1190,29 @@ body.light #reqBot .chat-input{
   }
 }
 
-/* Bigger logo */
 .intro-logo{
-  width: min(520px, 82vw);
+  width: min(560px, 86vw);
   height: auto;
   object-fit: contain;
 
-  /* 3D look */
   transform-style: preserve-3d;
-  animation: introFloat 2.8s ease-in-out infinite;
+  animation: introFloat 3.0s ease-in-out infinite;
 
-  /* glow */
   filter:
-    drop-shadow(0 18px 60px rgba(0,0,0,.55))
-    drop-shadow(0 0 35px rgba(124,58,237,.20))
-    drop-shadow(0 0 35px rgba(6,182,212,.14));
+    drop-shadow(0 25px 90px rgba(0,0,0,.70))
+    drop-shadow(0 0 60px rgba(124,58,237,.30))
+    drop-shadow(0 0 70px rgba(6,182,212,.22));
 }
 
-/* 3D tilt animation */
 @keyframes introFloat{
   0%{
-    transform: perspective(1100px) rotateX(12deg) rotateY(-14deg) translateY(0);
+    transform: perspective(1200px) rotateX(10deg) rotateY(-12deg) translateY(0);
   }
   50%{
-    transform: perspective(1100px) rotateX(-12deg) rotateY(14deg) translateY(-10px);
+    transform: perspective(1200px) rotateX(-10deg) rotateY(12deg) translateY(-10px);
   }
   100%{
-    transform: perspective(1100px) rotateX(12deg) rotateY(-14deg) translateY(0);
+    transform: perspective(1200px) rotateX(10deg) rotateY(-12deg) translateY(0);
   }
 }
 
