@@ -2937,32 +2937,34 @@ reqClose.onclick = () => {
     if(e.key === "Enter") handleSend();
   });
 
+
   // =========================
-// Lift chat above mobile keyboard (NO resize, like desktop)
+// Mobile only: lift chat above keyboard (no resize)
 // =========================
 (function liftChatAboveKeyboard(){
+  // موبايل فقط
+  if(window.innerWidth > 768) return;
+
   if(!window.visualViewport) return;
 
   const vv = window.visualViewport;
 
-  // bottom الأصلي من CSS (مثلاً 158px)
+  // bottom الأصلي من CSS
   const defaultBottom = parseFloat(getComputedStyle(reqBot).bottom) || 158;
 
   function update(){
     if(!reqBot.classList.contains("open")) return;
 
-    // ارتفاع الكيبورد (تقريباً)
     const keyboardHeight = Math.max(0, window.innerHeight - vv.height);
 
-    // إذا ما في كيبورد -> رجع الطبيعي
+    // إذا الكيبورد غير ظاهر
     if(keyboardHeight < 80){
       reqBot.style.bottom = defaultBottom + "px";
       return;
     }
 
-    // ارفع الشات فوق الكيبورد (بدون تغيير height)
-    reqBot.style.bottom =
-      (keyboardHeight + 16) + "px";
+    // ارفع الشات فوق الكيبورد
+    reqBot.style.bottom = (keyboardHeight + 16) + "px";
   }
 
   vv.addEventListener("resize", update);
