@@ -2048,7 +2048,7 @@ body.light .typing-bubble span{
       <div class="section-title reveal">
         <div>
           <h2>Selected Work</h2>
-          <p class="sub">Some examples of projects I can build for clients. Replace these with your real work anytime.</p>
+          <p class="sub">Some examples of projects I can build for clients.</p>
         </div>
       </div>
 
@@ -2651,6 +2651,8 @@ function hideTyping(){
   let lang = "en";
   let step = 0;
   let answers = {};
+  let chatLog = [];
+
 
   function detectLanguage(text){
     const t = text.toLowerCase();
@@ -2713,12 +2715,20 @@ function hideTyping(){
   };
 
   function addMsg(text, sender){
-    const div = document.createElement("div");
-    div.className = "msg " + sender;
-    div.textContent = text;
-    reqMessages.appendChild(div);
-    reqMessages.scrollTop = reqMessages.scrollHeight;
-  }
+  const div = document.createElement("div");
+  div.className = "msg " + sender;
+  div.textContent = text;
+  reqMessages.appendChild(div);
+  reqMessages.scrollTop = reqMessages.scrollHeight;
+
+  // ✅ Save chat history
+  chatLog.push({
+    sender,
+    text,
+    time: new Date().toLocaleString()
+  });
+}
+
 
   function setUIByLang(){
     reqTitle.textContent = TEXT[lang].title;
@@ -2778,8 +2788,11 @@ function hideTyping(){
 
 
   async function sendToEmail(){
-    const message =
-`📌 New Client Request
+    const fullChat =
+  chatLog.map(m => `[${m.time}] ${m.sender.toUpperCase()}: ${m.text}`).join("\n\n");
+
+const message =
+`📌 New Client Request (Chatbot)
 
 Service: ${answers.service || "-"}
 Description: ${answers.description || "-"}
@@ -2788,7 +2801,14 @@ Budget: ${answers.budget || "-"}
 Deadline: ${answers.deadline || "-"}
 Client Email: ${answers.email || "-"}
 
+----------------------------
+💬 FULL CHAT LOG
+----------------------------
+
+${fullChat}
+
 (Submitted from portfolio chatbot)`;
+
 
     await fetch(FORMSPREE_URL, {
       method: "POST",
@@ -2808,6 +2828,7 @@ Client Email: ${answers.email || "-"}
     step = 0;
     answers = {};
     reqMessages.innerHTML = "";
+    chatLog = [];
 
     setUIByLang();
 
@@ -2921,6 +2942,7 @@ reqClose.onclick = () => {
   answers = {};
   reqMessages.innerHTML = "";
   hideTyping();
+  chatLog = [];
 };
 
 
