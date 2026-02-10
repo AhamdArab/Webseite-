@@ -900,7 +900,7 @@ body.light .top-btn svg{
   opacity: 0;
   transform: translateY(16px) scale(.98);
   pointer-events:none;
-  transition: .25s ease;
+  transition: bottom .22s ease, opacity .25s ease, transform .25s ease;
 }
 
 #reqBot.open{
@@ -2938,49 +2938,44 @@ reqClose.onclick = () => {
   });
 
   // =========================
-// Mobile: move chat above keyboard (PRO)
+// Lift chat above mobile keyboard (NO resize, like desktop)
 // =========================
-function setupKeyboardSafeChat(){
+(function liftChatAboveKeyboard(){
   if(!window.visualViewport) return;
 
   const vv = window.visualViewport;
 
+  // bottom الأصلي من CSS (مثلاً 158px)
+  const defaultBottom = parseFloat(getComputedStyle(reqBot).bottom) || 158;
+
   function update(){
-    // إذا الشات مش مفتوح ما نعمل شيء
     if(!reqBot.classList.contains("open")) return;
 
-    // ارتفاع الجزء المرئي (ينقص عند ظهور الكيبورد)
-    const viewportHeight = vv.height;
-    const windowHeight = window.innerHeight;
+    // ارتفاع الكيبورد (تقريباً)
+    const keyboardHeight = Math.max(0, window.innerHeight - vv.height);
 
-    // فرق الارتفاع = تقريباً ارتفاع الكيبورد
-    const keyboardHeight = Math.max(0, windowHeight - viewportHeight);
+    // إذا ما في كيبورد -> رجع الطبيعي
+    if(keyboardHeight < 80){
+      reqBot.style.bottom = defaultBottom + "px";
+      return;
+    }
 
-    // نرفع الشات فوق الكيبورد
-    // 16px margin + safe area
-    reqBot.style.bottom = `calc(${keyboardHeight + 16}px + env(safe-area-inset-bottom))`;
+    // ارفع الشات فوق الكيبورد (بدون تغيير height)
+    reqBot.style.bottom =
+      (keyboardHeight + 16) + "px";
   }
 
   vv.addEventListener("resize", update);
   vv.addEventListener("scroll", update);
 
-  // تحديث عند فتح الشات
-  reqToggle.addEventListener("click", () => {
-    setTimeout(update, 120);
-  });
+  reqToggle.addEventListener("click", () => setTimeout(update, 120));
+  reqInput.addEventListener("focus", () => setTimeout(update, 120));
+  reqInput.addEventListener("blur", () => setTimeout(update, 120));
 
-  // تحديث عند التركيز على input
-  reqInput.addEventListener("focus", () => {
-    setTimeout(update, 120);
-  });
-
-  // رجوع طبيعي عند الإغلاق
   reqClose.addEventListener("click", () => {
-    reqBot.style.bottom = "";
+    reqBot.style.bottom = defaultBottom + "px";
   });
-}
-
-setupKeyboardSafeChat();
+})();
 
 });
 
