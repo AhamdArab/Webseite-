@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=1120, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>Ahmad Arab — Software Engineer</title>
   <meta name="description" content="Ahmad Arab — Software Engineer. Web Development, Automation, AI Integrations." />
   <meta name="theme-color" content="#0b1020" />
@@ -1420,6 +1420,37 @@ input[type="submit"],
     height: 50px;
     bottom: 30px;
     right: 15px;
+  }
+}
+
+#introOverlay{
+  width: 100vw;
+  height: 100vh;
+}
+
+.intro-box{
+  width: 100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.intro-logo{
+  max-width: 520px;
+  width: min(520px, 80vw);
+}
+
+@media (max-width: 768px) {
+  #introOverlay{
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .intro-logo{
+    width: 520px !important;
+    max-width: 520px !important;
   }
 }
 
