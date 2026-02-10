@@ -35,6 +35,12 @@
       --radius: 22px;
       --radius2: 28px;
       --max: 1120px;
+
+      --card: rgba(255,255,255,.06);
+  --card2: rgba(255,255,255,.10);
+
+  --input-bg: rgba(255,255,255,.04);
+  --solid: #0b1020; /* dark solid panels */
     }
 
     /* Light mode */
@@ -46,7 +52,20 @@
       --muted: rgba(10, 14, 25, .62);
       --line: rgba(10, 14, 25, .12);
       --shadow: 0 20px 80px rgba(10, 14, 25, .12);
+      --solid: #ffffff;
     }
+
+    body.light .btn.primary{
+  box-shadow: 0 20px 40px rgba(124,58,237,.10);
+}
+
+body.light .nav{
+  background: rgba(255,255,255,.75);
+}
+
+body.light .card{
+  background: rgba(255,255,255,.75);
+}
 
     *{ box-sizing: border-box; }
     html{ scroll-behavior: smooth; }
@@ -496,6 +515,136 @@
       background: rgba(255,255,255,.04);
     }
 
+    /* =========================
+   SERVICES ICONS (ULTRA PRO)
+========================= */
+
+.mini.pro-icon{
+  width: 58px;
+  height: 58px;
+  border-radius: 20px;
+  display:grid;
+  place-items:center;
+
+  /* Border gradient trick */
+  background:
+    linear-gradient(var(--bg), var(--bg)) padding-box,
+    linear-gradient(135deg,
+      rgba(124,58,237,.65),
+      rgba(6,182,212,.55),
+      rgba(34,197,94,.45),
+      rgba(249,115,22,.35)
+    ) border-box;
+
+  border: 1px solid transparent;
+  position: relative;
+  overflow:hidden;
+
+  /* Glass */
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+
+  box-shadow:
+    0 22px 70px rgba(0,0,0,.55),
+    0 0 0 6px rgba(124,58,237,.06);
+  transition: .25s ease;
+}
+
+/* Soft inner glow */
+.mini.pro-icon::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 30% 25%,
+      rgba(255,255,255,.22),
+      transparent 55%),
+    radial-gradient(circle at 70% 75%,
+      rgba(6,182,212,.18),
+      transparent 60%);
+  opacity: .95;
+  pointer-events:none;
+}
+
+/* Shine sweep */
+.mini.pro-icon::after{
+  content:"";
+  position:absolute;
+  inset:-65%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent);
+  transform: rotate(25deg);
+  animation: shine 7s linear infinite;
+  opacity:.55;
+  pointer-events:none;
+}
+
+/* SVG icon */
+.mini.pro-icon svg{
+  width: 24px;
+  height: 24px;
+  color: rgba(255,255,255,.92);
+  filter: drop-shadow(0 12px 25px rgba(0,0,0,.55));
+  position: relative;
+  z-index: 2;
+}
+
+/* Individual colors */
+.icon-web{
+  background:
+    linear-gradient(var(--bg), var(--bg)) padding-box,
+    linear-gradient(135deg, rgba(6,182,212,.80), rgba(124,58,237,.60)) border-box;
+}
+
+.icon-javafx{
+  background:
+    linear-gradient(var(--bg), var(--bg)) padding-box,
+    linear-gradient(135deg, rgba(249,115,22,.85), rgba(124,58,237,.55)) border-box;
+}
+
+.icon-backend{
+  background:
+    linear-gradient(var(--bg), var(--bg)) padding-box,
+    linear-gradient(135deg, rgba(34,197,94,.85), rgba(6,182,212,.55)) border-box;
+}
+
+.icon-debug{
+  background:
+    linear-gradient(var(--bg), var(--bg)) padding-box,
+    linear-gradient(135deg, rgba(255,255,255,.35), rgba(124,58,237,.75)) border-box;
+}
+
+.icon-uni{
+  background:
+    linear-gradient(var(--bg), var(--bg)) padding-box,
+    linear-gradient(135deg, rgba(124,58,237,.80), rgba(34,197,94,.45)) border-box;
+}
+
+.icon-media{
+  background:
+    linear-gradient(var(--bg), var(--bg)) padding-box,
+    linear-gradient(135deg, rgba(249,115,22,.80), rgba(6,182,212,.60)) border-box;
+}
+
+/* Hover effect */
+.service{
+  transition: .25s ease;
+}
+
+.service:hover{
+  transform: translateY(-3px);
+  border-color: rgba(255,255,255,.16);
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+}
+
+.service:hover .mini.pro-icon{
+  transform: translateY(-1px) scale(1.06);
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.65),
+    0 0 0 7px rgba(124,58,237,.10),
+    0 0 0 14px rgba(6,182,212,.06);
+}
+
+
     /* Portfolio */
     .project{
       padding: 16px;
@@ -644,7 +793,8 @@
   bottom: 150px;
   width: 340px;
   max-height: 460px;
-  background: #0b1020;
+  background: var(--solid);
+  color: var(--text);
   border: 1px solid var(--line);
   border-radius: 16px;
   display: none;
@@ -671,8 +821,9 @@
   line-height: 1.5;
 }
 
-#reqBot .msg.bot{ color:#fff; }
-#reqBot .msg.user{ color:#22c55e; }
+#reqBot .msg.bot{ color: var(--text); }
+#reqBot .msg.user{ color: rgba(34,197,94,.95); }
+
 
 #reqBot .chat-input{
   display:flex;
@@ -684,14 +835,15 @@
   padding:10px;
   border:none;
   outline:none;
-  background:#070a13;
+  background: var(--input-bg);
+  color: var(--text);
   color:#fff;
 }
 
 #reqBot .chat-input button{
   padding:10px 14px;
   border:none;
-  background:#7c3aed;
+  background: linear-gradient(135deg, var(--accent1), var(--accent3));
   color:#fff;
   cursor:pointer;
 }
@@ -736,7 +888,7 @@
   background: radial-gradient(circle at 50% 40%, rgba(124,58,237,.20), transparent 60%),
               radial-gradient(circle at 60% 55%, rgba(6,182,212,.18), transparent 55%),
               radial-gradient(circle at 35% 75%, rgba(34,197,94,.10), transparent 60%),
-              #050712;
+              var(--bg);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -1450,64 +1602,124 @@ input[type="submit"],
     </section>
 
     <!-- SERVICES -->
-    <section id="services" class="wrap">
+<section id="services" class="wrap">
   <div class="section-title reveal">
     <div>
       <h2>Services</h2>
-      <p class="sub">Professional development services, clean code, and fast delivery from Java systems to modern web apps.</p>
+      <p class="sub">
+        Professional development services, clean code, and fast delivery from Java systems to modern web apps.
+      </p>
     </div>
   </div>
 
   <div class="grid">
+
+    <!-- 1) Web Development -->
     <div class="card service col-4 reveal">
-      <div class="mini" aria-hidden="true">🌐</div>
+      <div class="mini pro-icon icon-web" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M4 5h16v14H4V5Z" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M4 9h16" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M8 13h8M8 16h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M6.5 7.2h.01M8.5 7.2h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+
       <h3>Web Development</h3>
       <p>
         Responsive websites and modern web apps using HTML, CSS, JavaScript, React, and Next.js.
       </p>
     </div>
 
+    <!-- 2) JavaFX -->
     <div class="card service col-4 reveal">
-      <div class="mini" aria-hidden="true">☕</div>
+      <div class="mini pro-icon icon-javafx" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M7 4h10v16H7V4Z" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M9 8h6M9 12h6M9 16h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M10 20h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </div>
+
       <h3>Java Applications (JavaFX)</h3>
       <p>
         Desktop applications with clean GUI interfaces, structured code, and professional layout.
       </p>
     </div>
 
+    <!-- 3) Backend -->
     <div class="card service col-4 reveal">
-      <div class="mini" aria-hidden="true">⚙️</div>
+      <div class="mini pro-icon icon-backend" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M7 7h10v10H7V7Z" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M4 12h3M17 12h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M12 4v3M12 17v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M9.2 9.2h.01M14.8 9.2h.01M9.2 14.8h.01M14.8 14.8h.01"
+                stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+
       <h3>Backend Development (Spring Boot)</h3>
       <p>
         REST APIs, backend systems, integrations, and scalable server-side solutions.
       </p>
     </div>
 
+    <!-- 4) Debugging -->
     <div class="card service col-4 reveal">
-      <div class="mini" aria-hidden="true">🛠️</div>
+      <div class="mini pro-icon icon-debug" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M10.5 14.5a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Z"
+                stroke="currentColor" stroke-width="1.8"/>
+          <path d="M14.2 14.2 20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M8.8 9.5h3.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M10.5 7.8v3.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </div>
+
       <h3>Code Fixing & Debugging</h3>
       <p>
         Fix errors, optimize performance, refactor code, and improve project structure.
       </p>
     </div>
 
+    <!-- 5) University -->
     <div class="card service col-4 reveal">
-      <div class="mini" aria-hidden="true">🎓</div>
+      <div class="mini pro-icon icon-uni" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M3 9l9-5 9 5-9 5-9-5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M7 12v5c3 2 7 2 10 0v-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M21 10v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </div>
+
       <h3>University Projects Support</h3>
       <p>
         Help with Java projects, GUI assignments, and explaining code step-by-step.
       </p>
     </div>
 
+    <!-- 6) CV + Logo + Video -->
     <div class="card service col-4 reveal">
-      <div class="mini" aria-hidden="true">🧾</div>
+      <div class="mini pro-icon icon-media" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M7 4h10v16H7V4Z" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M9 8h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M9 12h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M9 16h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M16.8 14.2l3.2 1.8v-8l-3.2 1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
       <h3>CV + Logo + Video Editing</h3>
       <p>
-        Professional German Lebenslauf writing, modern logo design, and video montage for projects.
+        Professional German Lebenslauf writing, modern logo design, and video editing for projects.
       </p>
     </div>
+
   </div>
 </section>
+
 
 
     <!-- WORK -->
@@ -1760,7 +1972,7 @@ input[type="submit"],
         data-reactions-enabled="1"
         data-emit-metadata="1"
         data-input-position="bottom"
-        data-theme="preferred_color_scheme"
+        data-theme="dark"
         data-lang="de"
         crossorigin="anonymous"
         async>
@@ -1974,6 +2186,7 @@ function updateProfileStats(){
 }
 
 updateProfileStats();
+
 
 // =========================
 // Giscus -> Performance score
