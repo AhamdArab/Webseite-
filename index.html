@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=1120, initial-scale=1.0" />
   <title>Ahmad Arab — Software Engineer</title>
   <meta name="description" content="Ahmad Arab — Software Engineer. Web Development, Automation, AI Integrations." />
   <meta name="theme-color" content="#0b1020" />
@@ -1238,140 +1238,12 @@
   height: 42px;
 }
 
-/* =========================
-   MOBILE DESKTOP SIMULATION
-   (Force desktop layout on mobile)
-========================= */
-
-/* Disable user zoom and force fixed view */
-@media (max-width: 768px) {
-  body {
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-    touch-action: manipulation;
-    overflow-x: auto;
-    min-width: 1120px !important; /* Force minimum desktop width */
-  }
-
-  html {
-    overflow-x: auto;
-  }
-
-  /* Main container */
-  .wrap {
-    min-width: 1120px !important;
-    width: 1120px !important;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-
-  /* Disable mobile-specific styles */
-  .hamburger {
-    display: none !important;
-  }
-  
-  .mobile {
-    display: none !important;
-  }
-  
-  nav ul {
-    display: flex !important;
-  }
-
-  /* Reset responsive grid to desktop */
-  .grid-hero {
-    grid-template-columns: 1.25fr .75fr !important;
-    gap: 26px !important;
-  }
-  
-  .col-4 {
-    grid-column: span 4 !important;
-  }
-  
-  .col-6 {
-    grid-column: span 6 !important;
-  }
-  
-  .col-8 {
-    grid-column: span 8 !important;
-  }
-  
-  .col-12 {
-    grid-column: span 12 !important;
-  }
-
-  /* Adjust spacing for better touch */
-  .btn {
-    padding: 14px 18px !important;
-    min-height: 44px;
-  }
-  
-  nav a {
-    padding: 12px 14px !important;
-    font-size: 14px !important;
-  }
-
-  /* Make sure header stays fixed */
-  header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: var(--bg);
-    padding: 10px 0;
-    margin-top: 0;
-  }
-  
-  .nav {
-    border-radius: 20px !important;
-    padding: 10px 20px !important;
-  }
-
-  /* Adjust font sizes for readability */
-  h1 {
-    font-size: 42px !important;
-    line-height: 1.1 !important;
-  }
-  
-  .lead {
-    font-size: 18px !important;
-    line-height: 1.6 !important;
-  }
-
-  /* Scroll indicator */
-  body::after {
-    content: "← Scroll →";
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: rgba(124, 58, 237, 0.9);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 14px;
-    z-index: 1000;
-    pointer-events: none;
-    animation: pulse 2s infinite;
-  }
-  
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-  }
-
-  /* Hide mobile menu completely */
-  #mobileMenu {
-    display: none !important;
-  }
-  
-  /* Force horizontal scroll indicator */
-  html {
-    background: linear-gradient(to right, 
-      rgba(124, 58, 237, 0.1) 1px, 
-      transparent 1px
-    ) 0 0 / 1120px 100%;
-  }
+@media (max-width: 768px){
+  nav ul{ display:flex !important; }
+  .hamburger{ display:none !important; }
+  .mobile{ display:none !important; }
 }
+
 
 /* For very small screens (iPhone SE etc) */
 @media (max-width: 375px) {
