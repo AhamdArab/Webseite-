@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ahmad Arab — Software Engineer</title>
   <meta name="description" content="Ahmad Arab — Software Engineer. Web Development, Automation, AI Integrations." />
   <meta name="theme-color" content="#0b1020" />
@@ -1424,55 +1424,149 @@ input[type="submit"],
 }
 
 /* =========================
-   RESET ZOOM BUTTON (CSS Only)
+   MOBILE DESKTOP FORCE MODE (FIXED)
 ========================= */
+
 @media (max-width: 768px) {
-  .zoom-reset-btn {
+  html {
+    overflow-x: auto;
+    overflow-y: scroll;
+    width: 100%;
+  }
+
+  body {
+    width: 1120px !important;
+    min-width: 1120px !important;
+    margin: 0 auto;
+    transform-origin: top left;
+    transition: transform 0.3s ease;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    touch-action: pan-x pan-y;
+    position: relative;
+  }
+
+  /* إجبار عرض الـ container */
+  .wrap {
+    width: 1120px !important;
+    min-width: 1120px !important;
+    max-width: 1120px !important;
+    margin: 0 auto;
+    padding: 0 40px;
+    box-sizing: border-box;
+  }
+
+  /* إخفاء عناصر الموبايل */
+  .hamburger,
+  .mobile {
+    display: none !important;
+  }
+  
+  nav ul {
+    display: flex !important;
+  }
+
+  /* إصلاح الشبكات */
+  .grid-hero {
+    grid-template-columns: 1.25fr 0.75fr !important;
+  }
+  
+  .grid {
+    grid-template-columns: repeat(12, 1fr) !important;
+  }
+  
+  .col-4 { grid-column: span 4 !important; }
+  .col-6 { grid-column: span 6 !important; }
+  .col-8 { grid-column: span 8 !important; }
+  .col-12 { grid-column: span 12 !important; }
+
+  /* Header معدل */
+  header {
+    width: 1120px !important;
+    margin: 0 auto;
+    padding: 10px 0;
+    box-sizing: border-box;
+  }
+  
+  .nav {
+    width: 100%;
+  }
+
+  /* زر Desktop View */
+  .desktop-reset-btn {
     position: fixed;
-    bottom: 80px; /* فوق زر chatbot */
+    bottom: 140px;
     right: 20px;
     background: linear-gradient(135deg, rgba(124, 58, 237, 0.95), rgba(6, 182, 212, 0.9));
     color: white;
-    padding: 12px 16px;
+    padding: 12px 18px;
     border-radius: 25px;
     font-size: 14px;
     font-weight: 600;
-    z-index: 1000;
+    z-index: 1002;
     cursor: pointer;
     border: none;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-    display: flex;
+    display: none;
     align-items: center;
-    gap: 8px;
-    opacity: 0.9;
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(10px);
     transition: all 0.3s ease;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    font-family: inherit;
   }
   
-  .zoom-reset-btn:hover {
+  .desktop-reset-btn.show {
     opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .desktop-reset-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
   }
   
-  .zoom-reset-btn:active {
-    transform: translateY(0);
-  }
-  
-  .zoom-reset-btn svg {
+  .desktop-reset-btn svg {
     width: 18px;
     height: 18px;
+    stroke: currentColor;
   }
   
-  /* Zoomed state */
-  body.zoomed {
-    transform: scale(1) !important;
-    transform-origin: top left;
+  .desktop-reset-btn .btn-text {
+    white-space: nowrap;
+  }
+
+  /* تحسين التمرير الأفقي */
+  body::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.6), rgba(6, 182, 212, 0.6));
+    border-radius: 4px;
   }
 }
 
+/* شاشات صغيرة جداً */
+@media (max-width: 375px) {
+  body {
+    transform: scale(0.9) !important;
+    transform-origin: top left !important;
+  }
+}
+
+/* منع التكبير بالضغط المزدوج */
+* {
+  touch-action: manipulation;
+}
   </style>
 </head>
 
@@ -2520,109 +2614,181 @@ copyBtn.addEventListener("click", async () => {
   }, 1400);
 });
 
+
 // =========================
-// RESET ZOOM FUNCTION
+// DESKTOP MODE FOR MOBILE
 // =========================
 
-// إنشاء زر الريست
-const resetBtn = document.createElement('button');
-resetBtn.className = 'zoom-reset-btn';
-resetBtn.innerHTML = `
+// إنشاء زر إعادة الحجم
+const desktopResetBtn = document.createElement('button');
+desktopResetBtn.className = 'desktop-reset-btn';
+desktopResetBtn.setAttribute('aria-label', 'Reset to desktop view');
+desktopResetBtn.innerHTML = `
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <path d="M21 8v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8"/>
-    <path d="m3 8 9 6 9-6"/>
-    <circle cx="12" cy="12" r="1"/>
-    <circle cx="19" cy="12" r="1"/>
-    <circle cx="5" cy="12" r="1"/>
+    <path d="M4 8V6a2 2 0 0 1 2-2h2M4 16v2a2 2 0 0 0 2 2h2M16 4h2a2 2 0 0 1 2 2v2M16 20h2a2 2 0 0 0 2-2v-2"/>
+    <path d="m9 9 6 6m0-6-6 6"/>
   </svg>
-  Reset Zoom
+  <span class="btn-text">Desktop View</span>
 `;
 
-document.body.appendChild(resetBtn);
+document.body.appendChild(desktopResetBtn);
 
-// متغيرات لتتبع الحجم
-let initialScale = 1;
-let currentZoom = 1;
+// متغيرات التتبع
+let isDesktopMode = true;
+let currentScale = 1;
+let isMobile = false;
 
-// وظيفة إعادة الحجم إلى 100%
-function resetZoom() {
-  // الطريقة 1: إعادة تعيين viewport
-  const viewportMeta = document.querySelector('meta[name="viewport"]');
-  if (viewportMeta) {
-    viewportMeta.content = 'width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=0.5, user-scalable=yes';
+// كشف إذا كان الجهاز موبايل
+function detectMobile() {
+  return window.innerWidth <= 768;
+}
+
+// تطبيق وضع سطح المكتب على الموبايل
+function applyDesktopMode() {
+  isMobile = detectMobile();
+  
+  if (isMobile) {
+    // حساب الـ scale المناسب لعرض 1120px على شاشة الموبايل
+    const viewportWidth = window.innerWidth;
+    currentScale = Math.min(viewportWidth / 1120, 1);
+    
+    // تطبيق التحويل على body
+    document.body.style.transform = `scale(${currentScale})`;
+    document.body.style.transformOrigin = 'top left';
+    document.body.style.width = '1120px';
+    document.body.style.minHeight = '100vh';
+    document.body.style.position = 'relative';
+    document.body.style.overflowX = 'auto';
+    document.body.style.overflowY = 'hidden';
+    
+    // إجبار عرض الـ wrap
+    const wraps = document.querySelectorAll('.wrap');
+    wraps.forEach(wrap => {
+      wrap.style.width = '1120px';
+      wrap.style.minWidth = '1120px';
+      wrap.style.maxWidth = '1120px';
+    });
+    
+    // إظهار الزر
+    desktopResetBtn.style.display = 'flex';
+    isDesktopMode = true;
+  } else {
+    // على سطح المكتب، إزالة التحويلات
+    document.body.style.transform = 'none';
+    document.body.style.width = 'auto';
+    desktopResetBtn.style.display = 'none';
   }
+}
+
+// إعادة الحجم إلى وضع سطح المكتب الكامل
+function resetToDesktopView() {
+  if (!isMobile) return;
   
-  // الطريقة 2: إعادة تعيين CSS transform على body
-  document.body.style.transform = 'scale(1)';
+  // إعادة حساب الـ scale
+  const viewportWidth = window.innerWidth;
+  currentScale = Math.min(viewportWidth / 1120, 1);
+  
+  // تطبيق التحويل
+  document.body.style.transform = `scale(${currentScale})`;
   document.body.style.transformOrigin = 'top left';
-  document.body.style.width = '100%';
-  document.body.style.overflowX = 'auto';
   
-  // الطريقة 3: إعادة تعيين scroll
-  window.scrollTo(0, 0);
+  // إعادة التمرير للأعلى
+  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   
-  // إظهار تأكيد بصري
-  resetBtn.innerHTML = `
+  // تأكيد بصري
+  showDesktopResetConfirmation();
+  
+  // إخفاء الزر بعد 3 ثواني
+  setTimeout(() => {
+    desktopResetBtn.classList.remove('show');
+  }, 3000);
+}
+
+// عرض تأكيد
+function showDesktopResetConfirmation() {
+  const btnText = desktopResetBtn.querySelector('.btn-text');
+  const originalText = btnText.textContent;
+  
+  desktopResetBtn.innerHTML = `
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
     </svg>
-    Reset ✓
+    <span class="btn-text">Desktop Mode ✓</span>
   `;
-  resetBtn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+  desktopResetBtn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
   
   setTimeout(() => {
-    resetBtn.innerHTML = `
+    desktopResetBtn.innerHTML = `
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M21 8v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8"/>
-        <path d="m3 8 9 6 9-6"/>
-        <circle cx="12" cy="12" r="1"/>
-        <circle cx="19" cy="12" r="1"/>
-        <circle cx="5" cy="12" r="1"/>
+        <path d="M4 8V6a2 2 0 0 1 2-2h2M4 16v2a2 2 0 0 0 2 2h2M16 4h2a2 2 0 0 1 2 2v2M16 20h2a2 2 0 0 0 2-2v-2"/>
+        <path d="m9 9 6 6m0-6-6 6"/>
       </svg>
-      Reset Zoom
+      <span class="btn-text">${originalText}</span>
     `;
-    resetBtn.style.background = 'linear-gradient(135deg, rgba(124, 58, 237, 0.95), rgba(6, 182, 212, 0.9))';
+    desktopResetBtn.style.background = 'linear-gradient(135deg, rgba(124, 58, 237, 0.95), rgba(6, 182, 212, 0.9))';
   }, 1500);
-  
-  currentZoom = 1;
 }
 
-// وظيفة الكشف عن التكبير (تقريبية)
-function checkZoomLevel() {
-  const visualViewport = window.visualViewport;
-  if (visualViewport) {
-    const zoom = visualViewport.scale;
-    
-    // إذا كان التكبير مختلفاً عن 100%
-    if (Math.abs(zoom - 1) > 0.1) {
-      currentZoom = zoom;
-      // تظهر الزر دائماً عندما يكون هناك تكبير
-      resetBtn.style.display = 'flex';
-    } else {
-      resetBtn.style.display = 'none';
-    }
+// كشف التكبير/التصغير (بدون visualViewport لتجنب مشاكل Safari)
+function checkForZoomChange() {
+  if (!isMobile) return;
+  
+  // حساب نسبة العرض الحقيقي للجسم
+  const bodyRect = document.body.getBoundingClientRect();
+  const bodyWidth = bodyRect.width;
+  const expectedWidth = 1120 * currentScale;
+  
+  // إذا كان هناك فرق كبير (المستخدم قام بتكبير/تصغير)
+  if (Math.abs(bodyWidth - expectedWidth) > 50) {
+    desktopResetBtn.classList.add('show');
+  } else {
+    desktopResetBtn.classList.remove('show');
   }
 }
 
-// إضافة حدث الزر
-resetBtn.addEventListener('click', resetZoom);
+// إضافة أحداث
+desktopResetBtn.addEventListener('click', resetToDesktopView);
 
-// مراقبة تغيرات viewport (للكشف عن التكبير)
-if (window.visualViewport) {
-  window.visualViewport.addEventListener('resize', checkZoomLevel);
-  window.visualViewport.addEventListener('scroll', checkZoomLevel);
-}
-
-// كشف تغير اتجاه الشاشة
-window.addEventListener('orientationchange', () => {
-  setTimeout(checkZoomLevel, 300);
+// عند التحميل
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    applyDesktopMode();
+    setTimeout(checkForZoomChange, 500);
+  }, 100);
 });
 
-// إخفاء الزر في البداية
-resetBtn.style.display = 'none';
+// عند تغيير حجم النافذة
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    applyDesktopMode();
+    checkForZoomChange();
+  }, 250);
+});
 
-// كشف التكبير عند تحميل الصفحة
-setTimeout(checkZoomLevel, 1000);
+// عند تغيير اتجاه الشاشة
+window.addEventListener('orientationchange', () => {
+  setTimeout(() => {
+    applyDesktopMode();
+    checkForZoomChange();
+  }, 300);
+});
+
+// كشف التمرير الأفقي (لإظهار الزر إذا تحرك المستخدم من الوضع الأصلي)
+let lastScrollX = 0;
+window.addEventListener('scroll', () => {
+  if (!isMobile) return;
+  
+  const currentScrollX = window.scrollX;
+  
+  // إذا تحرك المستخدم أفقيًا بشكل كبير
+  if (Math.abs(currentScrollX - lastScrollX) > 100) {
+    desktopResetBtn.classList.add('show');
+  }
+  
+  lastScrollX = currentScrollX;
+});
 
   </script>
 
