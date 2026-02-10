@@ -1423,6 +1423,47 @@ input[type="submit"],
   }
 }
 
+@media (max-width: 768px) {
+  .grid-hero {
+    grid-template-columns: 1.25fr .75fr !important;
+    gap: 26px !important;
+  }
+  
+  .col-4 {
+    grid-column: span 4 !important;
+  }
+  
+  .col-6 {
+    grid-column: span 6 !important;
+  }
+  
+  .col-8 {
+    grid-column: span 8 !important;
+  }
+  
+  .col-12 {
+    grid-column: span 12 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: none !important;
+  }
+  
+  .mobile {
+    display: none !important;
+  }
+  
+  nav ul {
+    display: flex !important;
+  }
+  
+  #mobileMenu {
+    display: none !important;
+  }
+}
+
   </style>
 </head>
 
