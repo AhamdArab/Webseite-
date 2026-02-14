@@ -1927,6 +1927,11 @@ body.light .typing-bubble span{
 }
 
 #globeCanvas{
+  touch-action: none; /* مهم جداً للموبايل */
+}
+
+
+#globeCanvas{
   width:100%;
   height:100%;
   display:block;
@@ -3618,14 +3623,27 @@ window.addEventListener("load", async () => {
   let velY = 0;
 
   canvas.addEventListener("pointerdown", (e) => {
-    isDown = true;
-    lastX = e.clientX;
-    lastY = e.clientY;
-  });
+  isDown = true;
+  lastX = e.clientX;
+  lastY = e.clientY;
 
-  window.addEventListener("pointerup", () => {
-    isDown = false;
-  });
+  // مهم للموبايل
+  canvas.setPointerCapture(e.pointerId);
+});
+
+
+  canvas.addEventListener("pointerup", (e) => {
+  isDown = false;
+
+  try{
+    canvas.releasePointerCapture(e.pointerId);
+  }catch(err){}
+});
+
+canvas.addEventListener("pointercancel", () => {
+  isDown = false;
+});
+
 
   window.addEventListener("pointermove", (e) => {
     if(!isDown) return;
