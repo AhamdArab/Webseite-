@@ -2077,6 +2077,210 @@ html, body{
   }
 }
 
+/* =========================
+   PREMIUM MOBILE UPGRADE
+   Paste at the END
+========================= */
+
+/* Safety */
+html, body{
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Wrap a bit tighter on phones */
+@media (max-width: 720px){
+  .wrap{
+    width: min(var(--max), calc(100% - 22px));
+  }
+}
+
+/* ---------- Premium Mobile Menu ---------- */
+.mobile{
+  display:none;
+}
+
+@media (max-width: 960px){
+
+  /* Mobile menu container */
+  .mobile{
+    display:block;
+    overflow:hidden;
+    transform-origin: top;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-8px) scale(.98);
+    transition: .28s ease;
+  }
+
+  .mobile.open{
+    max-height: 420px;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .mobile a{
+    padding: 15px 16px;
+  }
+
+  /* Better nav pill */
+  header{
+    top: 10px;
+  }
+}
+
+/* ---------- Mobile-first columns ---------- */
+@media (max-width: 720px){
+
+  .col-4,
+  .col-6,
+  .col-8,
+  .col-12{
+    grid-column: span 12 !important;
+  }
+
+  .split{
+    grid-template-columns: 1fr;
+  }
+
+  /* Hero */
+  .hero{
+    padding: 46px 0 18px;
+  }
+
+  h1{
+    font-size: 34px;
+    line-height: 1.12;
+    letter-spacing: -0.8px;
+  }
+
+  .lead{
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* CTA buttons full width */
+  .cta .btn{
+    width: 100%;
+    justify-content:center;
+  }
+
+  /* Stats in 1 column */
+  .stats{
+    grid-template-columns: 1fr;
+  }
+
+  /* Contact icons better spacing */
+  .contact-icons-pro{
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  /* Back to top + Chat buttons */
+  .top-btn{
+    right: 12px;
+    bottom: 12px;
+  }
+}
+
+/* =========================
+   MOBILE SLIDER (SERVICES + WORK)
+========================= */
+
+.slider-dots{
+  display:none;
+  margin-top: 14px;
+  justify-content:center;
+  gap: 8px;
+}
+
+.slider-dots .dot{
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.16);
+  box-shadow: none;
+}
+
+body.light .slider-dots .dot{
+  background: rgba(15,23,42,.18);
+}
+
+.slider-dots .dot.active{
+  width: 22px;
+  background: linear-gradient(135deg, rgba(124,58,237,.9), rgba(6,182,212,.7));
+}
+
+@media (max-width: 720px){
+
+  /* Turn grid into horizontal slider */
+  .mobile-slider{
+    display:flex !important;
+    overflow-x:auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 14px;
+
+    padding-bottom: 10px;
+
+    /* smoother */
+    scroll-behavior:smooth;
+  }
+
+  /* Hide scrollbar (nice) */
+  .mobile-slider::-webkit-scrollbar{
+    height: 10px;
+  }
+  .mobile-slider::-webkit-scrollbar-thumb{
+    background: transparent;
+  }
+
+  /* Each card becomes a slide */
+  .mobile-slider > .card{
+    flex: 0 0 88%;
+    scroll-snap-align: start;
+  }
+
+  /* Work cards a bit wider */
+  #work .mobile-slider > .card{
+    flex-basis: 92%;
+  }
+
+  /* Show dots */
+  .slider-dots{
+    display:flex;
+  }
+}
+
+/* Make cards more thumb-friendly */
+@media (max-width: 720px){
+  .service{
+    min-height: auto;
+  }
+
+  .project .thumb{
+    height: 170px;
+  }
+
+  .project-actions .btn{
+    width: 100%;
+    justify-content:center;
+  }
+}
+
+/* =========================
+   CHAT: better on phones
+========================= */
+@media (max-width: 720px){
+  #reqBot{
+    width: min(92vw, 360px);
+    right: 12px;
+  }
+  #reqToggle{
+    right: 12px;
+  }
+}
+
   </style>
 </head>
 
@@ -2242,7 +2446,9 @@ html, body{
     </div>
   </div>
 
-  <div class="grid">
+  <div class="grid mobile-slider" data-slider="services">
+    <div class="slider-dots" data-dots="services"></div>
+
 
     <!-- 1) Web Development -->
     <div class="card service col-4 reveal">
@@ -2361,7 +2567,9 @@ html, body{
         </div>
       </div>
 
-      <div class="grid">
+      <div class="grid mobile-slider" data-slider="work">
+        <div class="slider-dots" data-dots="work"></div>
+
         <article class="card project col-4 reveal">
   <div class="thumb" style="background-image:url('assets/Clinic.webp'); background-size:cover; background-position:center;" aria-hidden="true"></div>
 
@@ -2836,20 +3044,23 @@ html, body{
     const mobileMenu = $("#mobileMenu");
 
     menuBtn.addEventListener("click", () => {
-      const isHidden = mobileMenu.hasAttribute("hidden");
-      if(isHidden){
-        mobileMenu.removeAttribute("hidden");
-        menuBtn.setAttribute("aria-label","Close menu");
-      }else{
-        mobileMenu.setAttribute("hidden","");
-        menuBtn.setAttribute("aria-label","Open menu");
-      }
-    });
+  const isOpen = mobileMenu.classList.contains("open");
+
+  if(isOpen){
+    mobileMenu.classList.remove("open");
+    menuBtn.setAttribute("aria-label","Open menu");
+  }else{
+    mobileMenu.classList.add("open");
+    menuBtn.setAttribute("aria-label","Close menu");
+  }
+});
+
 
     // Close mobile menu when clicking a link
     $$("#mobileMenu a").forEach(a => {
-      a.addEventListener("click", () => mobileMenu.setAttribute("hidden",""));
-    });
+  a.addEventListener("click", () => mobileMenu.classList.remove("open"));
+});
+
 
     // --- Theme toggle (persist)
     const themeBtn = $("#themeBtn");
@@ -3458,6 +3669,65 @@ copyBtn.addEventListener("click", async () => {
   }, 1400);
 });
 
+// =========================
+// Mobile slider dots (Services + Work)
+// =========================
+function initMobileSlider(name){
+  const slider = document.querySelector(`.mobile-slider[data-slider="${name}"]`);
+  const dotsWrap = document.querySelector(`.slider-dots[data-dots="${name}"]`);
+
+  if(!slider || !dotsWrap) return;
+
+  const slides = [...slider.querySelectorAll(".card")];
+  if(slides.length <= 1) return;
+
+  dotsWrap.innerHTML = slides.map(() => `<span class="dot"></span>`).join("");
+  const dots = [...dotsWrap.querySelectorAll(".dot")];
+
+  function setActiveDot(i){
+    dots.forEach((d, idx) => d.classList.toggle("active", idx === i));
+  }
+
+  // Click dot -> scroll
+  dots.forEach((d, i) => {
+    d.addEventListener("click", () => {
+      slides[i].scrollIntoView({ behavior: "smooth", inline: "start" });
+    });
+  });
+
+  // Update on scroll
+  let raf = null;
+  slider.addEventListener("scroll", () => {
+    if(raf) cancelAnimationFrame(raf);
+
+    raf = requestAnimationFrame(() => {
+      const sliderRect = slider.getBoundingClientRect();
+
+      // find the slide closest to left edge
+      let bestIndex = 0;
+      let bestDist = Infinity;
+
+      slides.forEach((s, i) => {
+        const r = s.getBoundingClientRect();
+        const dist = Math.abs(r.left - sliderRect.left);
+        if(dist < bestDist){
+          bestDist = dist;
+          bestIndex = i;
+        }
+      });
+
+      setActiveDot(bestIndex);
+    });
+  });
+
+  // Default
+  setActiveDot(0);
+}
+
+window.addEventListener("load", () => {
+  initMobileSlider("services");
+  initMobileSlider("work");
+});
 
   </script>
 
