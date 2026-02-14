@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=1120, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ahmad Arab — Informatik Graduate • Web Developer</title>
   <meta name="description" content="Ahmad Arab — Informatik Graduate and Web Developer. Modern websites, Java projects, and automation solutions." />
   <meta name="theme-color" content="#0b1020" />
@@ -1754,15 +1754,15 @@ body.light #reqBot .chat-input{
   height: 42px;
 }
 
-@media (max-width: 768px){
+/*@media (max-width: 768px){
   nav ul{ display:flex !important; }
   .hamburger{ display:none !important; }
   .mobile{ display:none !important; }
-}
+}*/
 
 
 /* For very small screens (iPhone SE etc) */
-@media (max-width: 375px) {
+/*@media (max-width: 375px) {
   body {
     min-width: 1120px !important;
   }
@@ -1779,7 +1779,7 @@ body.light #reqBot .chat-input{
     font-size: 11px !important;
     padding: 6px 8px !important;
   }
-}
+}*/
 
 /* Prevent accidental zoom on double-tap */
 * {
@@ -1881,6 +1881,201 @@ body.light .typing-bubble span{
   }
 }
 
+/* =========================
+   MOBILE FIRST LAYER (PRO)
+   Paste this at the END
+========================= */
+
+/* Global phone safety */
+html, body{
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Make wrap actually responsive */
+.wrap{
+  width: min(var(--max), calc(100% - 28px));
+}
+
+/* ---------- Tablets & down ---------- */
+@media (max-width: 960px){
+
+  /* Hero layout */
+  .grid-hero{
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  /* Profile card spacing */
+  .profile{
+    padding: 16px;
+  }
+
+  /* Stats still 3 columns on tablet */
+  .stats{
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Hide desktop nav + show hamburger */
+  nav ul{ display:none; }
+  .hamburger{ display:flex; }
+
+  /* Mobile menu */
+  .mobile{ display:block; }
+
+  /* Footer */
+  .footer-grid{
+    grid-template-columns: 1fr;
+    text-align:center;
+  }
+
+  .footer-socials{
+    justify-content:center;
+  }
+
+  .footer-pro{
+    text-align:center;
+  }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 720px){
+
+  /* Make ALL columns full width */
+  .col-4,
+  .col-6,
+  .col-8,
+  .col-12{
+    grid-column: span 12 !important;
+  }
+
+  /* Reduce gaps */
+  .grid{
+    gap: 12px;
+  }
+
+  /* Hero padding */
+  .hero{
+    padding: 44px 0 22px;
+  }
+
+  /* Title & text */
+  h1{
+    font-size: 34px;
+    line-height: 1.12;
+    letter-spacing: -0.8px;
+  }
+
+  .lead{
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* CTA buttons full width for better UX */
+  .cta{
+    gap: 10px;
+  }
+
+  .cta .btn{
+    width: 100%;
+    justify-content:center;
+  }
+
+  /* Chips */
+  .chips{
+    gap: 8px;
+  }
+
+  .chip{
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+
+  /* Stats -> 1 column (looks premium on phone) */
+  .stats{
+    grid-template-columns: 1fr;
+  }
+
+  /* Services cards */
+  .service{
+    min-height: auto;
+  }
+
+  /* Timeline / About split -> 1 column */
+  .split{
+    grid-template-columns: 1fr;
+  }
+
+  /* Contact icons */
+  .contact-icons-pro{
+    gap: 18px;
+    margin-top: 34px;
+    justify-content:flex-start;
+  }
+
+  /* Reveal box */
+  .contact-reveal .row{
+    flex-direction: column;
+    align-items:flex-start;
+  }
+
+  /* Chatbot size */
+  #reqBot{
+    width: min(92vw, 360px);
+    right: 12px;
+  }
+
+  #reqToggle{
+    right: 12px;
+  }
+
+  /* Back to top */
+  .top-btn{
+    right: 12px;
+    bottom: 12px;
+  }
+}
+
+/* ---------- Small phones (iPhone SE etc) ---------- */
+@media (max-width: 420px){
+
+  /* Make nav pill less wide */
+  .nav{
+    padding: 10px 10px;
+    gap: 10px;
+  }
+
+  .brand strong{
+    font-size: 13px;
+  }
+
+  .brand span{
+    font-size: 11px;
+  }
+
+  /* Logo a bit smaller */
+  .logo{
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+  }
+
+  /* Buttons smaller */
+  .btn{
+    padding: 9px 12px;
+    font-size: 13px;
+  }
+
+  /* Headings */
+  h2{
+    font-size: 20px;
+  }
+
+  /* Chat */
+  #reqBot{
+    height: min(500px, calc(100dvh - 120px));
+  }
+}
 
   </style>
 </head>
